@@ -6,9 +6,11 @@ import ContactIcons from '../Contact/ContactIcons';
 const SideBar = () => (
   <section id="sidebar">
     <section id="intro">
-      <Link to="/" className="logo">
-        <img src="/images/rohan24@vt.edu-22fe3a48.jpg" alt="Rohan Malhotra" />
-      </Link>
+      <img
+        src={`${process.env.PUBLIC_URL}/profile.jpg`}
+        alt="Rohan Malhotra"
+        style={{ width: '150px', borderRadius: '8px' }}
+      />
       <header>
         <h2>Rohan Malhotra</h2>
         <p>

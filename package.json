@@ -16,7 +16,7 @@
     "lint": "eslint \"**/*.js\"",
     "start": "react-scripts start",
     "test": "npx jest",
-    "predeploy": "npm run build && react-snap",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
   "dependencies": {
