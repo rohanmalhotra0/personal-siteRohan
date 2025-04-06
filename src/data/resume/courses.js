@@ -1,12 +1,12 @@
 const courses = [
   {
-    title: 'Calculus 1',
-    number: 'Math 1225',
+    title: 'Linear Algebra',
+    number: 'Math 2114',
     link: 'https://math.vt.edu/undergrad-math/courses/math-1225.html',
     university: 'Virginia Tech',
   },
   {
-    title: 'Calculus 2',
+    title: 'Calculus 1, 2, and 3',
     number: 'Math 1226',
     link: 'https://math.vt.edu/undergrad-math/courses/math-1226.html',
     university: 'Virginia Tech',
@@ -24,14 +24,14 @@ const courses = [
     university: 'Virginia Tech',
   },
   {
-    title: 'Engineering Principles 1',
+    title: 'Engineering Principles 1 and 2',
     number: 'ENGE 1215',
     link: 'https://fye.vt.edu/parents-and-students/fye-courses-by-college/coe/enge-1215.html',
     university: 'Virginia Tech',
   },
   {
-    title: 'Engineering Principles 2',
-    number: 'ENGE 1216',
+    title: 'Comnbinations and Graph Theory',
+    number: 'Math 3214',
     link: 'https://www.coursicle.com/vt/courses/ENGE/1216/',
     university: 'Virginia Tech',
   },
@@ -48,13 +48,13 @@ const courses = [
     university: 'Virginia Tech',
   },
   {
-    title: 'Computer Organization 1',
+    title: 'Computer Organization 1 and 2',
     number: 'CS 2505',
     link: 'https://cs.vt.edu/Undergraduate/courses/CS2505.html',
     university: 'Virginia Tech',
   },
   {
-    title: 'Computer Organization 2',
+    title: 'Problem Solving with Computer Science',
     number: 'CS 2506',
     link: 'https://courses.cs.vt.edu/cs2506/',
     university: 'Virginia Tech',

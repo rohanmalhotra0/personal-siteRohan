@@ -14,6 +14,20 @@
 
 const work = [
   {
+    name: 'PIVOT At VT',
+    position: 'Lead Software Engineer',
+    url: 'https://www.y-axis.com/',
+    startDate: '2025-01-01',
+    endDate: '2027-08-01',
+    summary:
+      'At PIVOT at VT, I actively pioneer interdisciplinary solutions at the intersection of Computer Science, Finance, and Physics.',
+    highlights: [
+      'Leading a team of 12 coders, I coordinate tasks, manage GitHub commits, oversee the integration of complex algorithms, and ensure strategic progress to deliver effective financial innovations.',
+      'My primary project involves developing a Raspberry Pi-powered automated financial trading bot, integrating real-time market data, Python scripting, and physics-inspired models, achieving up to 85% predictive accuracy using the Alpaca Trading API.',
+      'Our Raspberry Pi solution is economical and energy-efficient, enabling future expansion into broader financial applications, aligning with PIVOT’s mission to leverage physics-driven insights for global economic challenges.',
+    ],
+  },
+  {
     name: 'Y-Axis',
     position: 'Software Engineering Intern',
     url: 'https://www.y-axis.com/',
