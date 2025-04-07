@@ -20,25 +20,11 @@ const work = [
     startDate: '2025-01-01',
     endDate: '2027-08-01',
     summary:
-      'At PIVOT at VT, I actively pioneer interdisciplinary solutions at the intersection of Computer Science, Finance, and Physics.',
+      'I actively pioneer interdisciplinary solutions at the intersection of Computer Science, Finance, and Physics.',
     highlights: [
-      'Leading a team of 12 coders, I coordinate tasks, manage GitHub commits, oversee the integration of complex algorithms, and ensure strategic progress to deliver effective financial innovations.',
+      'Leading a team of 12 coders, and helping over 35 members I coordinate tasks, manage GitHub commits, oversee the integration of complex algorithms, and ensure strategic progress to deliver effective financial innovations.',
       'My primary project involves developing a Raspberry Pi-powered automated financial trading bot, integrating real-time market data, Python scripting, and physics-inspired models, achieving up to 85% predictive accuracy using the Alpaca Trading API.',
       'Our Raspberry Pi solution is economical and energy-efficient, enabling future expansion into broader financial applications, aligning with PIVOT’s mission to leverage physics-driven insights for global economic challenges.',
-    ],
-  },
-  {
-    name: 'Y-Axis',
-    position: 'Software Engineering Intern',
-    url: 'https://www.y-axis.com/',
-    startDate: '2025-02-01',
-    endDate: '2025-08-01',
-    summary:
-      'Collaborated with UI/UX designers to convert design prototypes into responsive web pages. Improved SEO rankings through semantic markup and DOM manipulation, resulting in a 13% increase in impressions on Google Search Console.',
-    highlights: [
-      'Converted design prototypes into responsive web pages in collaboration with UI/UX designers.',
-      'Improved SEO rankings through effective semantic markup and DOM manipulation.',
-      'Achieved a 13% increase in impressions on Google Search Console.',
     ],
   },
   {
