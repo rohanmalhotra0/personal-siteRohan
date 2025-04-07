@@ -12,7 +12,7 @@ const courses = [
     university: 'Virginia Tech',
   },
   {
-    title: 'Calculus 3',
+    title: 'Linear Algebra',
     number: 'Math 2224',
     link: 'https://math.vt.edu/undergrad-math/courses/math-2204.html',
     university: 'Virginia Tech',
