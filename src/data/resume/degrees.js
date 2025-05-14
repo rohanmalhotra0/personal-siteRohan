@@ -1,9 +1,15 @@
 const degrees = [
   {
-    school: 'Virginia Tech Honors College of Engineering',
-    degree: 'B.E. in Computer Science, Minor in Mathematics',
+    school: 'Emory University',
+    degree: 'B.A. in Computer Science',
     link: 'https://vt.edu',
-    year: 2027,
+    year: 2028,
+  },
+  {
+    school: 'Emory University',
+    degree: 'B.S. in Finace',
+    link: 'https://vt.edu',
+    year: 2028,
   },
 
   {

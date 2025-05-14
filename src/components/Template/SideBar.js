@@ -22,8 +22,8 @@ const SideBar = () => (
     <section className="blurb">
       <h2>About</h2>
       <p>
-        Hi, I&apos;m Rohan Malhotra. I am a junior at Virginia Tech,
-        majoring in Computer Science and minoring in Mathematics.
+        Hi, I&apos;m Rohan Malhotra. I am a sophmore at Emory University,
+        double majoring in Computer Science and Finace.
         I have a passion for developing innovative software solutions
         and exploring emerging technologies. In my free time, I enjoy
         working on coding projects, learning new programming languages,
@@ -47,7 +47,7 @@ const SideBar = () => (
     <section id="footer">
       <ContactIcons />
       <p className="copyright">
-        &copy; Rohan Malhotra <Link to="/">rohanmalhotra.com</Link>.
+        &copy; Rohan Malhotra <Link to="/">rohanm.org</Link>.
       </p>
     </section>
   </section>
