@@ -1,8 +1,8 @@
 # Intro
 
-As a Computer Science and Finance student at Emory, I am passionate about leveraging data science, machine learning, and analytics to drive impactful solutions. My experiences include building predictive models for stock markets, developing web scrapers for data automation, and contributing to innovative CubeSat research. Through internships and projects, I have honed my skills in Python, Java, MATLAB, and frameworks like React and Flask.
+As a Computer Science and Economics student at NYU, I am passionate about leveraging data science, machine learning, and analytics to drive impactful solutions. My experiences include building predictive models for stock markets, developing web scrapers for data automation, and contributing to innovative CubeSat research. Through internships and projects, I have honed my skills in Python, Java, MATLAB, and frameworks like React and Flask.
 
-Notable achievements include founding a volunteer program teaching coding to special-needs students and leading a machine learning project correlating coffee sales data with financial market trends. I thrive in collaborative environments, tackling complex problems with creativity and data-driven insights.
+Notable achievements include founding a volunteer program steaching coding to special-needs students and leading a machine learning project correlating coffee sales data with financial market trends. I thrive in collaborative environments, tackling complex problems with creativity and data-driven insights.
 
 
 # I Like
