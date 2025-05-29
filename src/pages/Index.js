@@ -12,7 +12,7 @@ const Index = () => (
             <Link to="/">Rohan Malhotra</Link>
           </h2>
           <p>
-            Sophmore studying at Emory, Double majoring in Computer Science and Finance.
+            Sophmore studying at NYU, Double majoring in Computer Science and Economics.
           </p>
         </div>
       </header>

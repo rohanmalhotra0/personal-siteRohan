@@ -1,12 +1,12 @@
 const degrees = [
   {
-    school: 'NYU University',
+    school: 'New York University',
     degree: 'B.A. in Computer Science',
     link: 'https://vt.edu',
     year: 2028,
   },
   {
-    school: 'NYU University',
+    school: 'New York University',
     degree: 'B.A. in Economics',
     link: 'https://vt.edu',
     year: 2028,
