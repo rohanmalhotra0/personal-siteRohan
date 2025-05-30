@@ -15,7 +15,7 @@ const degrees = [
   {
     school: 'Chatham High School',
     degree: 'High School Diploma',
-    link: 'https://www.chatham-nj.org/',
+    link: 'https://www.chatham-nj.org',
     year: 2024,
   },
 ];
