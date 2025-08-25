@@ -24,6 +24,10 @@ const routes = [
     label: 'Contact',
     path: '/contact',
   },
+  {
+    label: 'RohanGPT',
+    path: '/rohanai',
+  },
 ];
 
 export default routes;
