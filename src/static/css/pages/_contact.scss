@@ -103,23 +103,6 @@
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
       }
 
-      &.primary {
-        border: 2px solid #667eea;
-        position: relative;
-
-        &::after {
-          content: 'Primary';
-          position: absolute;
-          top: 1em;
-          right: 1em;
-          background: linear-gradient(135deg, #667eea, #764ba2);
-          color: white;
-          padding: 0.3em 0.8em;
-          border-radius: 15px;
-          font-size: 0.8em;
-          font-weight: 600;
-        }
-      }
 
       .method-icon {
         font-size: 3em;
@@ -325,15 +308,6 @@
           transition: all 0.3s ease;
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 
-          &.primary {
-            background: white;
-            color: #667eea;
-
-            &:hover {
-              transform: translateY(-3px);
-              box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            }
-          }
 
           &.secondary {
             background: rgba(255, 255, 255, 0.2);

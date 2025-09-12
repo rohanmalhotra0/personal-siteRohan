@@ -184,14 +184,8 @@ const RohanGPT = () => {
                 </div>
                 <h4>Welcome to RohanGPT!</h4>
                 <p>
-                  I&apos;m here to help answer questions about Rohan&apos;s work,
-                  research, projects, and more. What would you like to know?
+                  Ask me anything just include your name and question.
                 </p>
-                <div className="suggested-questions">
-                  <span className="suggestion-tag">Ask about his research</span>
-                  <span className="suggestion-tag">Learn about his projects</span>
-                  <span className="suggestion-tag">Discuss technology</span>
-                </div>
               </div>
             )}
 

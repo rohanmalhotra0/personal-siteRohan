@@ -29,7 +29,7 @@ const Stats = () => (
           </div>
 
           <div className="publications-grid">
-            <div className="publication-card featured">
+            <div className="publication-card">
               <div className="publication-image">
                 <img
                   src={`${process.env.PUBLIC_URL}/images/reddit.png`}

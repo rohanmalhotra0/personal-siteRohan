@@ -24,7 +24,7 @@ const Contact = () => (
 
       <div className="contact-content">
         <div className="contact-methods">
-          <div className="contact-method primary">
+          <div className="contact-method">
             <div className="method-icon">
               <i className="fas fa-envelope" />
             </div>
