@@ -11,21 +11,60 @@ const Index = () => (
           <h2>
             <Link to="/">Rohan Malhotra</Link>
           </h2>
-          <p>
-            Sophmore studying at NYU, Double majoring in Computer Science and Economics.
-          </p>
+          <div className="subtitle">
+            <p className="main-subtitle">
+              Sophomore at NYU Courant Institute
+            </p>
+            <p className="secondary-subtitle">
+              Double Majoring in Computer Science & Economics | Minor in Mathematics
+            </p>
+          </div>
         </div>
       </header>
-      <p>
-        Welcome to my website. Please feel free to read more{' '}
-        <Link to="/about">about me</Link>, check out my{' '}
-        <Link to="/resume">resume</Link>, and explore my{' '}
-        <Link to="/projects">projects</Link>.
-      </p>
-      <p>
-        I also have a <Link to="/stats">research page</Link> where I share
-        some of my work and publications.
-      </p>
+
+      <div className="welcome-section">
+        <div className="quick-links">
+          <h3>Explore My Work</h3>
+          <div className="link-grid">
+            <Link to="/about" className="quick-link">
+              <div className="link-icon">
+                <i className="fas fa-user" />
+              </div>
+              <div className="link-content">
+                <h4>About Me</h4>
+                <p>Learn more about my journey and interests</p>
+              </div>
+            </Link>
+            <Link to="/resume" className="quick-link">
+              <div className="link-icon">
+                <i className="fas fa-file-alt" />
+              </div>
+              <div className="link-content">
+                <h4>Resume</h4>
+                <p>View my experience and achievements</p>
+              </div>
+            </Link>
+            <Link to="/projects" className="quick-link">
+              <div className="link-icon">
+                <i className="fas fa-rocket" />
+              </div>
+              <div className="link-content">
+                <h4>Projects</h4>
+                <p>Explore my latest work and innovations</p>
+              </div>
+            </Link>
+            <Link to="/stats" className="quick-link">
+              <div className="link-icon">
+                <i className="fas fa-chart-line" />
+              </div>
+              <div className="link-content">
+                <h4>Research</h4>
+                <p>Discover my publications and research</p>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </div>
     </article>
   </Main>
 );

@@ -7,15 +7,27 @@ const Cell = ({ data }) => (
     <article className="mini-post">
       <header>
         <h3>
-          <a href={data.link}>{data.title}</a>
+          {data.link ? (
+            <a href={data.link} target="_blank" rel="noopener noreferrer">
+              {data.title}
+            </a>
+          ) : (
+            <span>{data.title}</span>
+          )}
         </h3>
         <time className="published">
           {dayjs(data.date).format('MMMM, YYYY')}
         </time>
       </header>
-      <a href={data.link} className="image">
-        <img src={`${process.env.PUBLIC_URL}${data.image}`} alt={data.title} />
-      </a>
+      {data.link ? (
+        <a href={data.link} className="image" target="_blank" rel="noopener noreferrer">
+          <img src={`${process.env.PUBLIC_URL}${data.image}`} alt={data.title} />
+        </a>
+      ) : (
+        <div className="image">
+          <img src={`${process.env.PUBLIC_URL}${data.image}`} alt={data.title} />
+        </div>
+      )}
       <div className="description">
         <p>{data.desc}</p>
       </div>

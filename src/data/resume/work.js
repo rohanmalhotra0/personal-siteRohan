@@ -8,63 +8,91 @@
  * @property {string} startDate - Start date of the position in YYYY-MM-DD format
  * @property {string|undefined} endDate - End date of the position in YYYY-MM-DD format.
  * If undefined, the position is still active.
+ * @property {string} location - Location of the position
  * @property {string|undefined} summary - HTML/Markdown summary of the position
  * @property {string[]} highlights - Plain text highlights of the position (bulleted list)
  */
 
 const work = [
   {
-    name: 'PIVOT At VT',
-    position: 'Lead Software Engineer',
-    url: 'https://www.y-axis.com/',
-    startDate: '2025-01-01',
-    endDate: '2027-08-01',
-    summary:
-      'I actively pioneer interdisciplinary solutions at the intersection of Computer Science, Finance, and Physics.',
-    highlights: [
-      'Leading a team of 12 coders, and helping over 35 members I coordinate tasks, manage GitHub commits, oversee the integration of complex algorithms, and ensure strategic progress to deliver effective financial innovations.',
-      'My primary project involves developing a Raspberry Pi-powered automated financial trading bot, integrating real-time market data, Python scripting, and physics-inspired models, achieving up to 85% predictive accuracy using the Alpaca Trading API.',
-      'Our Raspberry Pi solution is economical and energy-efficient, enabling future expansion into broader financial applications, aligning with PIVOT’s mission to leverage physics-driven insights for global economic challenges.',
-    ],
+    name: 'Download Full Resume',
+    position: 'Click to download my full resume in PDF format.',
+    url: '/R_Malhotra_Resume.pdf',
+    startDate: '2025-01-20',
+    endDate: '',
+    location: '',
+    summary: '',
+    highlights: [],
   },
   {
     name: 'ARESS Software',
-    position: 'Data Analytics Intern',
+    position: 'Machine Learning Intern',
     url: 'https://www.aress.com/',
+    startDate: '2025-06-01',
+    endDate: '2025-08-01',
+    location: 'Chatham, NJ',
+    summary:
+      'Collaborated on LASSO and Ridge Regression prototypes in Python (scikit-learn) to forecast IT-support incident resolution times, with pilot results indicating a 15% projected improvement in SLA compliance.',
+    highlights: [
+      'Collaborated on LASSO and Ridge Regression prototypes in Python (scikit-learn) to forecast IT-support incident resolution times, with pilot results indicating a 15% projected improvement in SLA compliance.',
+      'Developed interactive Excel dashboards for real-time reporting of service metrics and model performance, enabling operations teams to make data-driven prioritization decisions.',
+    ],
+  },
+  {
+    name: 'Y-Axis Overseas Careers',
+    position: 'Business Analyst Intern',
+    url: 'https://www.y-axis.com/',
     startDate: '2024-06-01',
     endDate: '2024-08-01',
+    location: 'Blacksburg, VA',
     summary:
-      'Analyzed stock indicators to forecast market trends. Built regression models and developed web scrapers to automate data collection, enhancing data visualization and reporting for senior leadership.',
+      'Cleaned and normalized SQL data on client profiles and visa-application records to feed predictive models forecasting approval rates and processing timelines, reducing data-preparation time by 15%.',
     highlights: [
-      'Analyzed stock indicators (MACD, SMA, RSI) to forecast market trends.',
-      'Built LASSO and Ridge Regression models for predictive analysis.',
-      'Developed web scrapers to automate data collection.',
-      'Enhanced data visualization and reporting in Excel for actionable insights.',
+      'Cleaned and normalized SQL data on client profiles and visa-application records to feed predictive models forecasting approval rates and processing timelines, reducing data-preparation time by 15%.',
+      'Built Excel dashboards visualizing forecasted metrics and translated findings into clear, actionable recommendations for non-technical stakeholders.',
     ],
   },
   {
     name: 'Hume Center for National Security and Technology',
-    position: 'Undergraduate Research Assistant',
+    position: 'Aerospace Research Assistant',
     url: 'https://hume.vt.edu/',
     startDate: '2024-08-01',
     endDate: '2025-05-01',
+    location: 'Blacksburg, VA',
     summary:
-      'Researched advanced imaging and signal processing for space-based and defense applications. Utilized Python and satellite communication protocols for efficient data transmission from CubeSat imaging systems. Contributed to a proposal for NASA’s CubeSat Launch Initiative.',
+      'Collaborated with a multidisciplinary team to research imaging & signal-processing techniques for environmental coral reef health applications.',
     highlights: [
-      'Researched advanced imaging and signal processing techniques for defense applications.',
-      'Utilized Python and satellite communication protocols for efficient data transmission.',
-      'Contributed to a NASA CubeSat Launch Initiative proposal integrating autonomous imaging and communication systems.',
+      'Collaborated with a multidisciplinary team to research imaging & signal-processing techniques for environmental coral reef health applications.',
+      'Co-authored a NASA CubeSat Launch Initiative proposal, coordinating requirements with stakeholders and integrating autonomous imaging systems.',
     ],
   },
   {
-    // New entry: Attach your resume as a downloadable resource.
-    name: 'Download Full Resume',
-    position: 'Click to download my full resume in PDF format.',
-    url: '/R_Malhotra_Resume.pdf',
-    startDate: '2025-03-34', // Placeholder date
-    endDate: '',
-    summary: '',
-    highlights: [],
+    name: 'PIVOT at VT',
+    position: 'Co-President & Lead Software Engineer',
+    url: 'https://pivot.vt.edu/',
+    startDate: '2024-09-01',
+    endDate: 'present',
+    location: 'Blacksburg, VA',
+    summary:
+      'Lead a 40-member interdisciplinary organization, coordinating project teams, managing GitHub workflows, and overseeing algorithm integration to apply physics-driven computational methods to engineering and financial challenges.',
+    highlights: [
+      'Lead a 40-member interdisciplinary organization, coordinating project teams, managing GitHub workflows, and overseeing algorithm integration to apply physics-driven computational methods to engineering and financial challenges.',
+      'Developed a Raspberry Pi-powered automated trading bot integrating live market data, Python scripting, and oscillatory models, achieving up to 68% predictive accuracy with the Alpaca Trading API.',
+      'Mentor members in advanced programming and quantitative methods, fostering collaboration across physics, finance, and CS.',
+    ],
+  },
+  {
+    name: 'Special Olympics',
+    position: 'Intern & Volunteer',
+    url: 'https://www.specialolympics.org/',
+    startDate: '2019-09-01',
+    endDate: 'present',
+    location: 'Chatham, NJ',
+    summary:
+      'Interned at a school for students with disabilities teaching math and served as a 5-year volunteer for Special Olympics.',
+    highlights: [
+      'Interned at a school for students with disabilities teaching math and served as a 5-year volunteer for Special Olympics.',
+    ],
   },
 ];
 
