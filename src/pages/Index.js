@@ -22,6 +22,21 @@ const Index = () => (
         </div>
       </header>
 
+      {/* Video Section */}
+      <div className="video-section">
+        <h3 className="video-title">Refrax Demo</h3>
+        <div className="video-container">
+          <iframe
+            src="https://www.youtube.com/embed/uU2eMfCStBs"
+            title="Refrax Demo"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+      </div>
+
+      {/* Quick Links Section */}
       <div className="welcome-section">
         <div className="quick-links">
           <h3>Explore My Work</h3>

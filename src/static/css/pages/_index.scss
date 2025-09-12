@@ -67,6 +67,58 @@
     }
   }
 
+  /* 🎥 Video Section */
+  .video-section {
+    text-align: center;
+    margin: 3em auto;
+    padding: 2em;
+    max-width: 900px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.8s ease both;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    .video-title {
+      font-size: 2em;
+      margin-bottom: 1.5em;
+      font-weight: 600;
+      color: #2c3e50;
+      position: relative;
+      padding-bottom: 0.5em;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 2px;
+      }
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+      iframe {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        border: none;
+      }
+    }
+  }
+
   .welcome-section {
     margin: 2em 0;
     animation: slideInUp 0.8s ease 0.5s both;
@@ -385,6 +437,14 @@
       }
     }
 
+    .video-section {
+      padding: 1.5em;
+
+      .video-title {
+        font-size: 1.6em;
+      }
+    }
+
     .welcome-section {
       .welcome-text .intro-text {
         font-size: 1.1em;
@@ -419,6 +479,14 @@
   #index {
     .title h2 {
       font-size: 1.8em;
+    }
+
+    .video-section {
+      padding: 1em;
+
+      .video-title {
+        font-size: 1.4em;
+      }
     }
 
     .welcome-section {
