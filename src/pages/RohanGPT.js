@@ -97,7 +97,9 @@ const RohanGPT = () => {
   };
 
   useEffect(() => {
-    scrollToBottom();
+    if (messages.length > 0) {
+      scrollToBottom();
+    }
   }, [messages]);
 
   const askRohan = async () => {
