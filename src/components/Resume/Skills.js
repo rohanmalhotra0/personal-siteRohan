@@ -15,11 +15,6 @@ const Skills = ({ data }) => (
             {category.items.map((item) => (
               <div key={item.name} className="skill-item">
                 <span className="skill-name">{item.name}</span>
-                {item.level && (
-                  <span className={`skill-level skill-level-${item.level.toLowerCase().replace(/\s+/g, '-')}`}>
-                    {item.level}
-                  </span>
-                )}
                 {item.status && (
                   <span className={`skill-status skill-status-${item.status.toLowerCase().replace(/\s+/g, '-')}`}>
                     {item.status}
@@ -41,7 +36,6 @@ Skills.propTypes = {
       items: PropTypes.arrayOf(
         PropTypes.shape({
           name: PropTypes.string.isRequired,
-          level: PropTypes.string,
           status: PropTypes.string,
         }),
       ).isRequired,

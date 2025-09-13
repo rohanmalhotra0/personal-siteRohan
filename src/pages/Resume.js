@@ -3,11 +3,8 @@ import { Link } from 'react-router-dom';
 import Main from '../layouts/Main';
 import Education from '../components/Resume/Education';
 import Experience from '../components/Resume/Experience';
-import Courses from '../components/Resume/Courses';
 import Skills from '../components/Resume/Skills';
 import Projects from '../components/Resume/Projects';
-import References from '../components/Resume/References';
-import courses from '../data/resume/courses';
 import degrees from '../data/resume/degrees';
 import work from '../data/resume/work';
 import skills from '../data/resume/skills';
@@ -18,8 +15,6 @@ const sections = {
   Experience: () => <Experience data={work} />,
   Skills: () => <Skills data={skills} />,
   Projects: () => <Projects data={projects} />,
-  Courses: () => <Courses data={courses} />,
-  References: () => <References />,
 };
 
 const Resume = () => {
