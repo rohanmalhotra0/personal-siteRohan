@@ -7,28 +7,30 @@ const Skills = ({ data }) => (
     <div className="title">
       <h3>Technical Skills & Certifications</h3>
     </div>
-    {data.map((category) => (
-      <div key={category.category} className="skill-category">
-        <h4 className="category-title">{category.category}</h4>
-        <div className="skill-items">
-          {category.items.map((item) => (
-            <div key={item.name} className="skill-item">
-              <span className="skill-name">{item.name}</span>
-              {item.level && (
-                <span className={`skill-level skill-level-${item.level.toLowerCase()}`}>
-                  {item.level}
-                </span>
-              )}
-              {item.status && (
-                <span className={`skill-status skill-status-${item.status.toLowerCase()}`}>
-                  {item.status}
-                </span>
-              )}
-            </div>
-          ))}
+    <div className="skills-grid">
+      {data.map((category) => (
+        <div key={category.category} className="skill-category">
+          <h4 className="category-title">{category.category}</h4>
+          <div className="skill-items">
+            {category.items.map((item) => (
+              <div key={item.name} className="skill-item">
+                <span className="skill-name">{item.name}</span>
+                {item.level && (
+                  <span className={`skill-level skill-level-${item.level.toLowerCase().replace(/\s+/g, '-')}`}>
+                    {item.level}
+                  </span>
+                )}
+                {item.status && (
+                  <span className={`skill-status skill-status-${item.status.toLowerCase().replace(/\s+/g, '-')}`}>
+                    {item.status}
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    ))}
+      ))}
+    </div>
   </div>
 );
 

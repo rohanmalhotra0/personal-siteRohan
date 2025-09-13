@@ -61,47 +61,120 @@
   color: white;
 }
 
-.link-container {
+.tab-navigation {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 1.5em;
-  margin-top: 1em;
+  gap: 0.5em;
+  margin-top: 1.5em;
   position: relative;
   z-index: 1;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  padding: 0.5em;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.link-container h4 {
-  margin: 0;
+.tab-button {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1em;
+  font-weight: 500;
+  padding: 0.8em 1.5em;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
   animation: fadeInUp 0.8s ease;
   animation-fill-mode: both;
 }
 
-.link-container h4:nth-child(1) { animation-delay: 0.1s; }
-.link-container h4:nth-child(2) { animation-delay: 0.2s; }
-.link-container h4:nth-child(3) { animation-delay: 0.3s; }
-.link-container h4:nth-child(4) { animation-delay: 0.4s; }
-.link-container h4:nth-child(5) { animation-delay: 0.5s; }
-.link-container h4:nth-child(6) { animation-delay: 0.6s; }
+.tab-button:nth-child(1) { animation-delay: 0.1s; }
+.tab-button:nth-child(2) { animation-delay: 0.2s; }
+.tab-button:nth-child(3) { animation-delay: 0.3s; }
+.tab-button:nth-child(4) { animation-delay: 0.4s; }
+.tab-button:nth-child(5) { animation-delay: 0.5s; }
+.tab-button:nth-child(6) { animation-delay: 0.6s; }
 
-.link-container h4 a {
-  color: rgba(255, 255, 255, 0.9);
-  text-decoration: none;
-  font-size: 1.1em;
-  font-weight: 500;
-  padding: 0.5em 1em;
-  border-radius: 25px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-}
-
-.link-container h4 a:hover {
-  background: rgba(255, 255, 255, 0.2);
+.tab-button:hover {
+  background: rgba(255, 255, 255, 0.15);
   color: white;
   transform: translateY(-2px);
+}
+
+.tab-button.active {
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+  font-weight: 600;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.tab-button.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-radius: 25px;
+  z-index: -1;
+}
+
+/* Tab content styling */
+.tab-content {
+  margin-top: 2em;
+  min-height: 60vh;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+.tab-panel {
+  display: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease-in-out;
+}
+
+.tab-panel.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  animation: slideInUp 0.5s ease-out;
+}
+
+.tab-panel.transitioning {
+  opacity: 0.5;
+  transform: translateY(10px);
+}
+
+.tab-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(102, 126, 234, 0.2);
+  border-left: 4px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* Section styling */
@@ -111,7 +184,7 @@
 .projects,
 .courses,
 .references {
-  margin: 3em 0;
+  margin: 0;
   padding: 2em;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 15px;
@@ -119,61 +192,304 @@
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   transition: all 0.3s ease;
-  animation: slideInUp 0.6s ease;
-  animation-fill-mode: both;
 }
 
-.education:nth-child(2),
-.experience:nth-child(2),
-.skills:nth-child(2),
-.projects:nth-child(2),
-.courses:nth-child(2),
-.references:nth-child(2) { animation-delay: 0.1s; }
-
-.education:nth-child(3),
-.experience:nth-child(3),
-.skills:nth-child(3),
-.projects:nth-child(3),
-.courses:nth-child(3),
-.references:nth-child(3) { animation-delay: 0.2s; }
-
-.education:nth-child(4),
-.experience:nth-child(4),
-.skills:nth-child(4),
-.projects:nth-child(4),
-.courses:nth-child(4),
-.references:nth-child(4) { animation-delay: 0.3s; }
-
-.education:nth-child(5),
-.experience:nth-child(5),
-.skills:nth-child(5),
-.projects:nth-child(5),
-.courses:nth-child(5),
-.references:nth-child(5) { animation-delay: 0.4s; }
-
-.education:nth-child(6),
-.experience:nth-child(6),
-.skills:nth-child(6),
-.projects:nth-child(6),
-.courses:nth-child(6),
-.references:nth-child(6) { animation-delay: 0.5s; }
-
-.education:nth-child(7),
-.experience:nth-child(7),
-.skills:nth-child(7),
-.projects:nth-child(7),
-.courses:nth-child(7),
-.references:nth-child(7) { animation-delay: 0.6s; }
-
-.education:hover,
-.experience:hover,
-.skills:hover,
-.projects:hover,
-.courses:hover,
-.references:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+/* Job Card Styling */
+.job-card {
+  margin-bottom: 2em;
+  padding: 1.5em;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  border-left: 4px solid #667eea;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
+
+.job-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1em;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.job-title-section {
+  flex: 1;
+  min-width: 200px;
+}
+
+.job-title {
+  margin: 0 0 0.3em 0;
+  font-size: 1.3em;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.job-title a {
+  color: #667eea;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.job-title a:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+.job-position {
+  display: block;
+  font-size: 1.1em;
+  color: #7f8c8d;
+  font-weight: 500;
+  margin-bottom: 0.5em;
+}
+
+.job-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3em;
+  text-align: right;
+}
+
+.job-dates {
+  font-size: 0.95em;
+  color: #95a5a6;
+  font-weight: 500;
+  background: rgba(102, 126, 234, 0.1);
+  padding: 0.3em 0.8em;
+  border-radius: 15px;
+}
+
+.job-location {
+  font-size: 0.9em;
+  color: #7f8c8d;
+  font-style: italic;
+}
+
+.job-summary {
+  margin: 1em 0;
+  padding: 1em;
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: 8px;
+  border-left: 3px solid #667eea;
+}
+
+.summary-text {
+  margin: 0;
+  line-height: 1.6;
+  color: #34495e;
+  font-size: 0.95em;
+}
+
+.job-highlights {
+  margin: 1em 0 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.highlight-item {
+  position: relative;
+  padding: 0.5em 0 0.5em 1.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.5;
+  color: #2c3e50;
+  font-size: 0.9em;
+}
+
+.highlight-item::before {
+  content: '▶';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  color: #667eea;
+  font-size: 0.8em;
+}
+
+/* Education Card Styling */
+.degree-card {
+  margin-bottom: 1.5em;
+  padding: 1.5em;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  border-left: 4px solid #764ba2;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.degree-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.degree-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.degree-info {
+  flex: 1;
+  min-width: 200px;
+}
+
+.degree-title {
+  margin: 0 0 0.5em 0;
+  font-size: 1.4em;
+  font-weight: 600;
+  color: #2c3e50;
+  line-height: 1.3;
+}
+
+.school-info {
+  margin: 0;
+}
+
+.school-link {
+  color: #764ba2;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.school-link:hover {
+  color: #667eea;
+  text-decoration: underline;
+}
+
+.degree-year {
+  display: flex;
+  align-items: center;
+}
+
+.year-badge {
+  background: linear-gradient(135deg, #764ba2, #667eea);
+  color: white;
+  padding: 0.5em 1em;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9em;
+  box-shadow: 0 2px 8px rgba(118, 75, 162, 0.3);
+}
+
+/* Skills Section Styling */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2em;
+  margin-top: 1em;
+}
+
+.skill-category {
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  padding: 1.5em;
+  border-left: 4px solid #667eea;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.skill-category:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.category-title {
+  margin: 0 0 1.5em 0;
+  font-size: 1.3em;
+  font-weight: 600;
+  color: #2c3e50;
+  text-align: center;
+  padding-bottom: 0.5em;
+  border-bottom: 2px solid #ecf0f1;
+}
+
+.skill-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+}
+
+.skill-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8em 1em;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.skill-item:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateX(5px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.skill-name {
+  font-weight: 500;
+  color: #2c3e50;
+  font-size: 0.95em;
+}
+
+.skill-level,
+.skill-status {
+  padding: 0.3em 0.8em;
+  border-radius: 15px;
+  font-size: 0.8em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Skill Level Colors */
+.skill-level-expert,
+.skill-level-advanced {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  color: white;
+}
+
+.skill-level-intermediate {
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  color: white;
+}
+
+.skill-level-completed {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+}
+
+/* Skill Status Colors */
+.skill-status-passed {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  color: white;
+}
+
+.skill-status-scheduled {
+  background: linear-gradient(135deg, #9b59b6, #8e44ad);
+  color: white;
+}
+
+.skill-status-scheduled-march,
+.skill-status-scheduled-june {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+}
+
+/* Remove old animation delays and hover effects for tabbed interface */
 
 .education .title,
 .experience .title,
@@ -242,6 +558,11 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   #resume .title {
@@ -250,12 +571,17 @@
   #resume .title h2 {
     font-size: 2em;
   }
-  #resume .title .link-container {
-    gap: 1em;
+  .tab-navigation {
+    gap: 0.3em;
+    padding: 0.3em;
+    margin-top: 1em;
   }
-  #resume .title .link-container h4 a {
-    font-size: 1em;
-    padding: 0.4em 0.8em;
+  .tab-button {
+    font-size: 0.9em;
+    padding: 0.6em 1em;
+  }
+  .tab-content {
+    min-height: 50vh;
   }
   .education,
   .experience,
@@ -264,10 +590,18 @@
   .courses,
   .references {
     padding: 1.5em;
-    margin: 2em 0;
   }
-  .skill-items {
+  .skills-grid {
     grid-template-columns: 1fr;
+    gap: 1.5em;
+  }
+  
+  .skill-items {
+    gap: 0.6em;
+  }
+  
+  .skill-item {
+    padding: 0.6em 0.8em;
   }
   .project-header {
     flex-direction: column;
@@ -277,5 +611,16 @@
   .job-meta {
     flex-direction: column;
     gap: 0.5em;
+  }
+}
+
+@media (max-width: 480px) {
+  .tab-navigation {
+    flex-direction: column;
+    gap: 0.2em;
+  }
+  .tab-button {
+    width: 100%;
+    margin: 0.1em 0;
   }
 }

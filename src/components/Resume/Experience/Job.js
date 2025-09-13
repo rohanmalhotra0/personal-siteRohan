@@ -5,42 +5,51 @@ import Markdown from 'markdown-to-jsx';
 
 const Job = ({
   data: {
-    name, position, url, startDate, endDate, summary, highlights,
+    name, position, url, startDate, endDate, summary, highlights, location,
   },
 }) => (
-  <article className="jobs-container">
-    <header>
-      <h4>
-        <a href={url}>{name}</a> - {position}
-      </h4>
-      <p className="daterange">
-        {' '}
-        {dayjs(startDate).format('MMMM YYYY')} -{' '}
-        {endDate ? dayjs(endDate).format('MMMM YYYY') : 'PRESENT'}
-      </p>
+  <article className="job-card">
+    <header className="job-header">
+      <div className="job-title-section">
+        <h4 className="job-title">
+          <a href={url} target="_blank" rel="noopener noreferrer">{name}</a>
+        </h4>
+        <span className="job-position">{position}</span>
+      </div>
+      <div className="job-meta">
+        <span className="job-dates">
+          {dayjs(startDate).format('MMM YYYY')} -{' '}
+          {endDate ? dayjs(endDate).format('MMM YYYY') : 'Present'}
+        </span>
+        {location && <span className="job-location">{location}</span>}
+      </div>
     </header>
-    {summary ? (
-      <Markdown
-        options={{
-          overrides: {
-            p: {
-              props: {
-                className: 'summary',
+    {summary && (
+      <div className="job-summary">
+        <Markdown
+          options={{
+            overrides: {
+              p: {
+                props: {
+                  className: 'summary-text',
+                },
               },
             },
-          },
-        }}
-      >
-        {summary}
-      </Markdown>
-    ) : null}
-    {highlights ? (
-      <ul className="points">
+          }}
+        >
+          {summary}
+        </Markdown>
+      </div>
+    )}
+    {highlights && highlights.length > 0 && (
+      <ul className="job-highlights">
         {highlights.map((highlight) => (
-          <li key={highlight}>{highlight}</li>
+          <li key={highlight} className="highlight-item">
+            {highlight}
+          </li>
         ))}
       </ul>
-    ) : null}
+    )}
   </article>
 );
 
@@ -53,6 +62,7 @@ Job.propTypes = {
     endDate: PropTypes.string,
     summary: PropTypes.string,
     highlights: PropTypes.arrayOf(PropTypes.string.isRequired),
+    location: PropTypes.string,
   }).isRequired,
 };
 
