@@ -199,11 +199,16 @@ const RohanGPT = () => {
                 <div className="message-avatar">
                   {msg.role === 'user' ? (
                     <span className="avatar-text">{name}</span>
-                  ) : (
-                    <span className="avatar-text">Rohan</span>
-                  )}
+                  ) : null}
                 </div>
                 <div className="message-content">
+                  {msg.role !== 'user' && (
+                    <img
+                      src={`${process.env.PUBLIC_URL}/profile.jpg`}
+                      alt="Rohan Malhotra"
+                      className="inline-avatar-img"
+                    />
+                  )}
                   <div className="message-text">{msg.content}</div>
                   <div className="message-time">
                     {new Date().toLocaleTimeString([], {
@@ -245,6 +250,7 @@ const RohanGPT = () => {
                 />
               </div>
               <div className="question-input-wrapper">
+                <i className="fas fa-message input-icon" />
                 <input
                   type="text"
                   placeholder="Ask RohanGPT anything..."

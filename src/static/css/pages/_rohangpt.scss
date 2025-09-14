@@ -220,6 +220,16 @@
           position: relative;
           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
+          .inline-avatar-img {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+          }
+
           .message-text {
             margin: 0 0 0.5em 0;
             line-height: 1.5;
