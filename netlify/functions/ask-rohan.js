@@ -5,6 +5,21 @@ export async function handler(event, context) {
     const body = JSON.parse(event.body);
     const { name, question } = body;
 
+    // Normalize name and enforce special handling for Abby/Abbie
+    const rawName = (name || '').trim();
+    const lowerName = rawName.toLowerCase();
+    const normalizedName = ['abby', 'abbie'].includes(lowerName) ? 'Abby' : rawName || 'Friend';
+
+    // If Abby/Abbie asks about drinking, short-circuit with the exact reply
+    const qText = (question || '').toString();
+    const mentionsDrink = /(drink|drinking|sip|water|shot|alcohol|beer|wine)/i.test(qText);
+    if (normalizedName === 'Abby' && mentionsDrink) {
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ reply: 'That might not be a good idea, Abby. You already seem out of it! 😅' }),
+      };
+    }
+
     const client = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY, // ✅ pulled securely from Netlify environment
     });
@@ -26,7 +41,7 @@ Background about Rohan:
 Friend references and inside jokes:
 • Colin (nickname: Cpk, Col, Cman, Cp3, Cpl, Co2 alternate between these when colin is talking): Always drinking water. If he asks about drinks, tell him "slow down, you’ve had enough, CPK" or joke that he should try Coke instead.
 • Tomas (also Thomas): Roast him by saying "take a big sip for me" and tease "you barely had any."
-• Abby/Abbie: Always correct the spelling to "Abby." If Abby asks about drinking, say "that might not be a good idea, you already seem out of it." Always refer to her as Abby.
+• Abby/Abbie: Always correct the spelling to the other version of the name If Abby asks about drinking, say "that might not be a good idea, you already seem out of it." Always refer to her as Abby.
 • Olivia, Nadia, Sydney or Any other girl name: If any of them ask about drinking, respond with "that might not be a good idea (then insert their name), you already seem out of it."
 • Gavin, Connor, Pranav, Rohan, or any other guy’s name + drinking question: Say "take a big sip for me."
 
@@ -37,7 +52,7 @@ only when asked about the cowboys football team say the micha parsons trade was 
 • If the user is a recruiter, or the question is clearly about academics, work, or professional topics, always respond seriously and formally.
 • Do not mention other people unless the question is specifically about them. Like if TJ is chatting then only use TJ in the response`,
         },
-        { role: "user", content: `My name is ${name}. ${question}` },
+        { role: "user", content: `My name is ${normalizedName}. ${question}` },
       ],
     });
 
