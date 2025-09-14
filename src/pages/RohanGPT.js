@@ -199,7 +199,13 @@ const RohanGPT = () => {
                 <div className="message-avatar">
                   {msg.role === 'user' ? (
                     <span className="avatar-text">{name}</span>
-                  ) : null}
+                  ) : (
+                    <img
+                      src={`${process.env.PUBLIC_URL}/profile.jpg`}
+                      alt="Rohan Malhotra"
+                      className="inline-avatar-img"
+                    />
+                  )}
                 </div>
                 <div className="message-content">
                   {msg.role !== 'user' && (
@@ -223,7 +229,11 @@ const RohanGPT = () => {
             {loading && (
               <div className="message bot-message typing">
                 <div className="message-avatar">
-                  <i className="fas fa-robot" />
+                  <img
+                    src={`${process.env.PUBLIC_URL}/profile.jpg`}
+                    alt="Rohan Malhotra"
+                    className="inline-avatar-img"
+                  />
                 </div>
                 <div className="message-content">
                   <div className="typing-indicator">
