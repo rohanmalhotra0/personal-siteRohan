@@ -104,11 +104,18 @@ const RohanGPT = () => {
 
     try {
       const functionsBase = process.env.NODE_ENV === 'production'
-        ? process.env.REACT_APP_FUNCTIONS_BASE
+        ? 'https://rohanm.org' // Use the actual domain for production
         : 'http://localhost:8888';
 
       // console.log('Making API call to:', `${functionsBase}/.netlify/functions/ask-rohan`);
+      // console.log('Environment:', process.env.NODE_ENV);
       // console.log('Request body:', { message: input, name });
+
+      // Test if the function endpoint exists
+      // const testResponse = await fetch(`${functionsBase}/.netlify/functions/ask-rohan`, {
+      //   method: 'GET',
+      // });
+      // console.log('Function test response:', testResponse.status);
 
       const response = await fetch(`${functionsBase}/.netlify/functions/ask-rohan`, {
         method: 'POST',
@@ -144,10 +151,21 @@ const RohanGPT = () => {
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
       console.error('Error:', error);
+
+      // Provide a more helpful error message
+      let errorMessage = 'Sorry, I\'m having trouble connecting right now. ';
+      if (error.message.includes('404')) {
+        errorMessage += 'The API service is temporarily unavailable. Please try again later.';
+      } else if (error.message.includes('Network')) {
+        errorMessage += 'Please check your internet connection and try again.';
+      } else {
+        errorMessage += `Error: ${error.message}. Please try again.`;
+      }
+
       const botMessage = {
         id: Date.now() + 1,
         role: 'bot',
-        content: `Error: ${error.message}. Please try again.`,
+        content: errorMessage,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
       setMessages((prev) => [...prev, botMessage]);
@@ -188,7 +206,7 @@ const RohanGPT = () => {
         <div className="messages-container" ref={chatEndRef}>
           {messages.length === 0 && (
             <div className="welcome-message">
-              <div className="welcome-icon">👋</div>
+              <div className="welcome-icon" />
               <h4>Welcome to RohanGPT!</h4>
               <p>Ask me anything! Just include your name and question.</p>
             </div>

@@ -1,9 +1,14 @@
 import OpenAI from "openai";
 
 export async function handler(event, context) {
+  console.log('Function called with event:', JSON.stringify(event, null, 2));
+  console.log('Context:', JSON.stringify(context, null, 2));
+  
   try {
     const body = JSON.parse(event.body);
     const { name, message } = body;
+    
+    console.log('Parsed body:', { name, message });
 
     // Normalize name and enforce special handling for Abby/Abbie
     const rawName = (name || '').trim();
@@ -16,6 +21,12 @@ export async function handler(event, context) {
     if (normalizedName === 'Abby' && mentionsDrink) {
       return {
         statusCode: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        },
         body: JSON.stringify({ response: 'That might not be a good idea, Abby. You already seem out of it! 😅' }),
       };
     }
@@ -58,12 +69,24 @@ only when asked about the cowboys football team say the micha parsons trade was 
 
     return {
       statusCode: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      },
       body: JSON.stringify({ response: completion.choices[0].message.content }),
     };
   } catch (err) {
     console.error("ask-rohan error:", err);
     return {
       statusCode: 500,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      },
       body: JSON.stringify({ error: err.message }),
     };
   }
