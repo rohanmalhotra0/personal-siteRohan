@@ -163,8 +163,8 @@
           }
 
           .message-bubble {
-            background: #667eea;
-            color: white;
+            background: #e5e5ea;
+            color: #000;
             border-radius: 18px 18px 4px 18px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             position: relative;
@@ -177,7 +177,7 @@
               width: 0;
               height: 0;
               border: 6px solid transparent;
-              border-left-color: #667eea;
+              border-left-color: #e5e5ea;
               border-bottom: none;
               border-right: none;
             }
@@ -217,7 +217,7 @@
             .user-avatar {
               width: 100%;
               height: 100%;
-              background: #667eea;
+              background: #8e8e93;
               border-radius: 50%;
               display: flex;
               align-items: center;
@@ -262,8 +262,8 @@
 
         &.bot {
           .message-bubble {
-            background: white;
-            color: #333;
+            background: #007aff;
+            color: white;
             border-radius: 18px 18px 18px 4px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             position: relative;
@@ -276,7 +276,7 @@
               width: 0;
               height: 0;
               border: 6px solid transparent;
-              border-right-color: white;
+              border-right-color: #007aff;
               border-bottom: none;
               border-left: none;
             }
@@ -318,7 +318,74 @@
       position: sticky;
       bottom: 0;
 
-        .input-row {
+      .input-column {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        .message-input-wrapper {
+          width: 100%;
+
+          .input-with-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            .input-icon {
+              position: absolute;
+              left: 16px;
+              color: #999;
+              font-size: 14px;
+              z-index: 1;
+            }
+
+            .message-input {
+              width: 100%;
+              min-height: 44px;
+              max-height: 120px;
+              padding: 12px 16px 12px 48px;
+              border: 1px solid #ddd;
+              border-radius: 22px;
+              font-size: 16px;
+              font-family: inherit;
+              line-height: 1.4;
+              outline: none;
+              resize: none;
+              overflow-y: auto;
+              transition: all 0.3s ease;
+              box-sizing: border-box;
+
+              &:focus {
+                border-color: #667eea;
+                box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+              }
+
+              &::placeholder {
+                color: #999;
+              }
+
+              // Custom scrollbar for webkit browsers
+              &::-webkit-scrollbar {
+                width: 4px;
+              }
+
+              &::-webkit-scrollbar-track {
+                background: transparent;
+              }
+
+              &::-webkit-scrollbar-thumb {
+                background: #ccc;
+                border-radius: 2px;
+              }
+
+              &::-webkit-scrollbar-thumb:hover {
+                background: #999;
+              }
+            }
+          }
+        }
+
+        .bottom-row {
           display: flex;
           gap: 8px;
           align-items: flex-end;
@@ -362,49 +429,6 @@
             }
           }
 
-          .message-input-wrapper {
-            flex: 2;
-            display: flex;
-            gap: 8px;
-            align-items: flex-end;
-
-            .input-with-icon {
-              position: relative;
-              display: flex;
-              align-items: center;
-              flex: 1;
-
-              .input-icon {
-                position: absolute;
-                left: 16px;
-                color: #999;
-                font-size: 14px;
-                z-index: 1;
-              }
-
-              .message-input {
-                width: 100%;
-                padding: 12px 16px 12px 40px;
-                border: 1px solid #ddd;
-                border-radius: 20px;
-                font-size: 16px;
-                background: #f8f9fa;
-                outline: none;
-                transition: border-color 0.2s;
-                resize: none;
-                height: 44px;
-                max-height: 120px;
-
-                &:focus {
-                  border-color: #667eea;
-                  background: white;
-                }
-
-                &::placeholder {
-                  color: #999;
-                }
-              }
-            }
 
             .send-button {
               padding: 12px 16px;

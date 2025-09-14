@@ -16,9 +16,20 @@ const RohanGPT = () => {
     }
   };
 
+  const autoResize = () => {
+    if (inputRef.current) {
+      inputRef.current.style.height = 'auto';
+      inputRef.current.style.height = `${Math.min(inputRef.current.scrollHeight, 120)}px`;
+    }
+  };
+
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    autoResize();
+  }, [input]);
 
   // Focus input on mobile
   useEffect(() => {
@@ -68,6 +79,13 @@ const RohanGPT = () => {
     setInput('');
     setLoading(true);
 
+    // Reset textarea height after sending
+    setTimeout(() => {
+      if (inputRef.current) {
+        inputRef.current.style.height = '44px';
+      }
+    }, 100);
+
     // Check for personalized overrides first
     const override = getPersonalizedOverride(input, name);
     if (override) {
@@ -89,6 +107,9 @@ const RohanGPT = () => {
         ? process.env.REACT_APP_FUNCTIONS_BASE
         : 'http://localhost:8888';
 
+      // console.log('Making API call to:', `${functionsBase}/.netlify/functions/ask-rohan`);
+      // console.log('Request body:', { message: input, name });
+
       const response = await fetch(`${functionsBase}/.netlify/functions/ask-rohan`, {
         method: 'POST',
         headers: {
@@ -101,11 +122,17 @@ const RohanGPT = () => {
         }),
       });
 
+      // console.log('Response status:', response.status);
+      // console.log('Response ok:', response.ok);
+
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        const errorText = await response.text();
+        console.error('Error response:', errorText);
+        throw new Error(`Network response was not ok: ${response.status} - ${errorText}`);
       }
 
       const data = await response.json();
+      // console.log('Response data:', data);
 
       const botMessage = {
         id: Date.now() + 1,
@@ -120,7 +147,7 @@ const RohanGPT = () => {
       const botMessage = {
         id: Date.now() + 1,
         role: 'bot',
-        content: getGeneralResponse(),
+        content: `Error: ${error.message}. Please try again.`,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
       setMessages((prev) => [...prev, botMessage]);
@@ -134,6 +161,7 @@ const RohanGPT = () => {
       e.preventDefault();
       askRohan();
     }
+    // Allow Shift+Enter for new lines
   };
 
   return (
@@ -156,7 +184,7 @@ const RohanGPT = () => {
           </div>
         </div>
 
-        {/* Messages */}
+        {/* Messages - Now at the top */}
         <div className="messages-container" ref={chatEndRef}>
           {messages.length === 0 && (
             <div className="welcome-message">
@@ -202,35 +230,37 @@ const RohanGPT = () => {
           )}
         </div>
 
-        {/* Input */}
+        {/* Input - Now at the bottom */}
         <div className="input-container">
-          <div className="input-row">
-            <div className="name-input-wrapper">
-              <div className="input-with-icon">
-                <i className="fas fa-user input-icon" />
-                <input
-                  type="text"
-                  placeholder="Your name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="name-input"
-                  maxLength={20}
-                />
-              </div>
-            </div>
+          <div className="input-column">
             <div className="message-input-wrapper">
               <div className="input-with-icon">
                 <i className="fas fa-comment input-icon" />
-                <input
+                <textarea
                   ref={inputRef}
-                  type="text"
                   placeholder="Ask RohanGPT anything..."
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={handleKeyPress}
                   className="message-input"
                   maxLength={500}
+                  rows={1}
                 />
+              </div>
+            </div>
+            <div className="bottom-row">
+              <div className="name-input-wrapper">
+                <div className="input-with-icon">
+                  <i className="fas fa-user input-icon" />
+                  <input
+                    type="text"
+                    placeholder="Your name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="name-input"
+                    maxLength={20}
+                  />
+                </div>
               </div>
               <button
                 type="button"
