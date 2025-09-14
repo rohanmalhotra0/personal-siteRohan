@@ -1,154 +1,129 @@
-import React, { useState, useRef, useEffect } from 'react';
-import Main from '../layouts/Main';
-
-// Generate RohanGPT responses
-const getGeneralResponse = (question) => {
-  const lowerQuestion = question.toLowerCase();
-
-  // Rohan-specific questions
-  if (lowerQuestion.includes('rohan') || lowerQuestion.includes('about rohan') || lowerQuestion.includes('who is rohan')) {
-    return 'Rohan is a sophomore at NYU studying Computer Science + Economics with a Math minor. He\'s a Software Intern, Web Developer, and aspiring Software Dev and Actuary. He works on CubeSat imaging research, has research publications, runs a Physics Club called PIVOT, and does finance/ML modeling. His hobbies include basketball, fantasy football, and weightlifting. He\'s playful, witty, and sometimes roasts his friends! 😄';
-  }
-
-  if (lowerQuestion.includes('projects') || lowerQuestion.includes('work')) {
-    return 'Rohan has several cool projects! He built Refrax.io - an interactive platform for financial and scientific visualization using Three.js and Plotly.js. He\'s also done CubeSat research at the Hume Center, published papers on Reddit sentiment analysis and capital allocation, and works on ML models for financial prediction. Pretty impressive stuff! 🚀';
-  }
-
-  if (lowerQuestion.includes('research') || lowerQuestion.includes('publications')) {
-    return 'Rohan has published research on Reddit sentiment analysis and market volatility, plus work on capital allocation using the Kelly Criterion. He\'s also done CubeSat research at the Hume Center, working on autonomous imaging and communication systems for NASA proposals. The guy\'s got some serious academic chops! 📚';
-  }
-
-  if (lowerQuestion.includes('nyu') || lowerQuestion.includes('school') || lowerQuestion.includes('university')) {
-    return 'Rohan is a sophomore at NYU studying Computer Science + Economics with a Math minor. He\'s at the Courant Institute and seems to be doing really well academically! 🎓';
-  }
-
-  if (lowerQuestion.includes('hobbies') || lowerQuestion.includes('basketball') || lowerQuestion.includes('fantasy football')) {
-    return 'Rohan loves basketball, fantasy football, and weightlifting! He\'s pretty active and competitive. You should challenge him to a game sometime! 🏀';
-  }
-
-  if (lowerQuestion.includes('contact') || lowerQuestion.includes('email') || lowerQuestion.includes('reach')) {
-    return 'You can reach Rohan through his website! He\'s got contact info and social media links there. He\'s pretty responsive, so don\'t hesitate to reach out! 📧';
-  }
-
-  // Default responses
-  const responses = [
-    'That\'s an interesting question! Rohan would probably have a witty response to that. What else can I help you with? 🤔',
-    'Hmm, I\'m not sure about that one. Maybe ask Rohan directly - he\'s pretty smart! 😅',
-    'Good question! Rohan\'s got lots of experience with different projects and research. Want to know more about his work? 💭',
-    'I\'m not entirely sure about that, but Rohan\'s always learning new things. What else would you like to know? 🤷‍♂️',
-    'That\'s a tough one! Rohan might have some insights on that. Want to ask about his projects or research instead? 🧠',
-  ];
-
-  return responses[Math.floor(Math.random() * responses.length)];
-};
-
-const generateRohanResponse = (name, question) => {
-  const lowerQuestion = question.toLowerCase();
-  const lowerName = name.toLowerCase();
-
-  // Friend-specific responses
-  if (lowerName === 'colin' || lowerName === 'cpk' || lowerName === 'col' || lowerName === 'cman' || lowerName === 'cp3' || lowerName === 'cpl' || lowerName === 'co2') {
-    if (lowerQuestion.includes('drink') || lowerQuestion.includes('water')) {
-      return 'Slow down, you\'ve had enough, CPK! Maybe try some Coke instead? 😄';
-    }
-    return `Hey CPK! ${getGeneralResponse(question)}`;
-  }
-
-  if (lowerName === 'tomas' || lowerName === 'thomas') {
-    if (lowerQuestion.includes('drink')) {
-      return 'Take a big sip for me! You barely had any anyway 😏';
-    }
-    return `Hey Tomas! ${getGeneralResponse(question)}`;
-  }
-
-  if (lowerName === 'abby' || lowerName === 'abbie') {
-    if (lowerQuestion.includes('drink')) {
-      return 'That might not be a good idea, Abby. You already seem out of it! 😅';
-    }
-    return `Hey Abby! ${getGeneralResponse(question)}`;
-  }
-
-  if (lowerName === 'olivia' || lowerName === 'nadia' || lowerName === 'sydney') {
-    if (lowerQuestion.includes('drink')) {
-      return `That might not be a good idea, ${name}. You already seem out of it! 😅`;
-    }
-    return `Hey ${name}! ${getGeneralResponse(question)}`;
-  }
-
-  if (lowerName === 'gavin' || lowerName === 'connor' || lowerName === 'pranav' || lowerName === 'rohan') {
-    if (lowerQuestion.includes('drink')) {
-      return 'Take a big sip for me! 🍻';
-    }
-    return `Hey ${name}! ${getGeneralResponse(question)}`;
-  }
-
-  return getGeneralResponse(question);
-};
+import React, { useState, useEffect, useRef } from 'react';
 
 const RohanGPT = () => {
-  const [name, setName] = useState('');
-  const [question, setQuestion] = useState('');
   const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState('');
+  const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
   const chatEndRef = useRef(null);
+  const inputRef = useRef(null);
+
+  const { PUBLIC_URL } = process.env;
 
   const scrollToBottom = () => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (chatEndRef.current) {
+      chatEndRef.current.scrollTop = chatEndRef.current.scrollHeight;
+    }
   };
 
   useEffect(() => {
-    if (messages.length > 0) {
-      scrollToBottom();
-    }
+    scrollToBottom();
   }, [messages]);
 
+  // Focus input on mobile
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
+  const getGeneralResponse = () => {
+    const responses = [
+      'That\'s an interesting question! I\'d love to help you with that.',
+      'Great question! Let me think about that for a moment.',
+      'I\'m here to help! Can you tell me more about what you\'re looking for?',
+      'That sounds fascinating! I\'d be happy to discuss that with you.',
+      'Thanks for asking! I\'m always excited to chat about new topics.',
+    ];
+    return responses[Math.floor(Math.random() * responses.length)];
+  };
+
+  const getPersonalizedOverride = (message, userName) => {
+    const lowerMessage = message.toLowerCase();
+    const lowerName = userName.toLowerCase();
+
+    // Check for specific name + keyword combinations
+    if (lowerName.includes('colin') && lowerMessage.includes('drink')) {
+      return 'Take a big sip Colin! 🍺';
+    }
+    if (lowerName.includes('abbie') && lowerMessage.includes('drink')) {
+      return 'Take a big sip Abbie! 🍺';
+    }
+
+    return null;
+  };
+
   const askRohan = async () => {
-    if (!name.trim() || !question.trim() || loading) return;
+    if (!input.trim() || !name.trim()) return;
 
     const userMessage = {
-      id: Date.now() + Math.random().toString(36).substr(2, 9),
+      id: Date.now(),
       role: 'user',
-      content: question,
+      content: input,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      name,
     };
+
     setMessages((prev) => [...prev, userMessage]);
-    setQuestion('');
+    setInput('');
     setLoading(true);
 
+    // Check for personalized overrides first
+    const override = getPersonalizedOverride(input, name);
+    if (override) {
+      setTimeout(() => {
+        const botMessage = {
+          id: Date.now() + 1,
+          role: 'bot',
+          content: override,
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        };
+        setMessages((prev) => [...prev, botMessage]);
+        setLoading(false);
+      }, 1000);
+      return;
+    }
+
     try {
-      // Call the Netlify function
-      const response = await fetch('/.netlify/functions/ask-rohan', {
+      const functionsBase = process.env.NODE_ENV === 'production'
+        ? process.env.REACT_APP_FUNCTIONS_BASE
+        : 'http://localhost:8888';
+
+      const response = await fetch(`${functionsBase}/.netlify/functions/ask-rohan`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: name.trim(),
-          question: question.trim(),
+          message: input,
+          name,
+          conversationHistory: messages.slice(-10), // Last 10 messages for context
         }),
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error('Network response was not ok');
       }
 
       const data = await response.json();
 
       const botMessage = {
-        id: Date.now() + Math.random().toString(36).substr(2, 9),
-        role: 'assistant',
-        content: data.reply,
+        id: Date.now() + 1,
+        role: 'bot',
+        content: data.response || getGeneralResponse(),
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
+
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
       console.error('Error:', error);
-      // Fallback to local response if API fails
-      const fallbackResponse = generateRohanResponse(name.trim(), question.trim());
-      const errorMessage = {
-        id: Date.now() + Math.random().toString(36).substr(2, 9),
-        role: 'assistant',
-        content: fallbackResponse,
+      const botMessage = {
+        id: Date.now() + 1,
+        role: 'bot',
+        content: getGeneralResponse(),
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
-      setMessages((prev) => [...prev, errorMessage]);
+      setMessages((prev) => [...prev, botMessage]);
     } finally {
       setLoading(false);
     }
@@ -162,93 +137,76 @@ const RohanGPT = () => {
   };
 
   return (
-    <Main>
-      <article id="rohangpt" className="post">
-        <div className="chat-container">
-          <div className="chat-header">
-            <div className="chat-info">
+    <div id="rohangpt">
+      <div className="mobile-chat-container">
+        {/* Header */}
+        <div className="chat-header">
+          <div className="header-content">
+            <div className="bot-avatar">
+              <img src={`${PUBLIC_URL}/profile.jpg`} alt="Rohan" className="avatar-img" />
+            </div>
+            <div className="bot-info">
               <h3>RohanGPT</h3>
               <p>AI Assistant</p>
             </div>
-            <div className="chat-status">
-              <div className={`status-indicator ${loading ? 'typing' : 'online'}`}>
-                <i className={`fas ${loading ? 'fa-ellipsis-h' : 'fa-circle'}`} />
-                {loading ? 'Typing...' : 'Online'}
+          </div>
+          <div className="status-indicator">
+            <div className={`status-dot ${loading ? 'typing' : 'online'}`} />
+            <span>{loading ? 'Typing...' : 'Online'}</span>
+          </div>
+        </div>
+
+        {/* Messages */}
+        <div className="messages-container" ref={chatEndRef}>
+          {messages.length === 0 && (
+            <div className="welcome-message">
+              <div className="welcome-icon">👋</div>
+              <h4>Welcome to RohanGPT!</h4>
+              <p>Ask me anything! Just include your name and question.</p>
+            </div>
+          )}
+
+          {messages.map((msg) => (
+            <div key={msg.id} className={`message ${msg.role === 'user' ? 'user' : 'bot'}`}>
+              <div className="message-avatar">
+                {msg.role === 'user' ? (
+                  <div className="user-avatar">
+                    <span className="user-name">{msg.name ? msg.name.charAt(0).toUpperCase() : 'U'}</span>
+                  </div>
+                ) : (
+                  <img src={`${PUBLIC_URL}/profile.jpg`} alt="Rohan" className="avatar-img" />
+                )}
+              </div>
+              <div className="message-content">
+                <div className="message-bubble">
+                  <p>{msg.content}</p>
+                  <span className="message-time">{msg.timestamp}</span>
+                </div>
               </div>
             </div>
-          </div>
+          ))}
 
-          <div className="chat-messages" ref={chatEndRef}>
-            {messages.length === 0 && (
-              <div className="welcome-message">
-                <div className="welcome-icon">
-                  <i className="fas fa-hand-wave" />
-                </div>
-                <h4>Welcome to RohanGPT!</h4>
-                <p>
-                  Ask me anything just include your name and question.
-                </p>
+          {loading && (
+            <div className="message bot">
+              <div className="message-avatar">
+                <img src={`${PUBLIC_URL}/profile.jpg`} alt="Rohan" className="avatar-img" />
               </div>
-            )}
-
-            {messages.map((msg) => (
-              <div
-                key={msg.id}
-                className={`message ${msg.role === 'user' ? 'user-message' : 'bot-message'}`}
-              >
-                <div className="message-avatar">
-                  {msg.role === 'user' ? (
-                    <span className="avatar-text">{name}</span>
-                  ) : (
-                    <img
-                      src={`${process.env.PUBLIC_URL}/profile.jpg`}
-                      alt="Rohan Malhotra"
-                      className="inline-avatar-img"
-                    />
-                  )}
-                </div>
-                <div className="message-content">
-                  {msg.role !== 'user' && (
-                    <img
-                      src={`${process.env.PUBLIC_URL}/profile.jpg`}
-                      alt="Rohan Malhotra"
-                      className="inline-avatar-img"
-                    />
-                  )}
-                  <div className="message-text">{msg.content}</div>
-                  <div className="message-time">
-                    {new Date().toLocaleTimeString([], {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })}
-                  </div>
+              <div className="message-content">
+                <div className="typing-indicator">
+                  <span />
+                  <span />
+                  <span />
                 </div>
               </div>
-            ))}
+            </div>
+          )}
+        </div>
 
-            {loading && (
-              <div className="message bot-message typing">
-                <div className="message-avatar">
-                  <img
-                    src={`${process.env.PUBLIC_URL}/profile.jpg`}
-                    alt="Rohan Malhotra"
-                    className="inline-avatar-img"
-                  />
-                </div>
-                <div className="message-content">
-                  <div className="typing-indicator">
-                    <span />
-                    <span />
-                    <span />
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div className="chat-input-container">
-            <div className="input-group">
-              <div className="name-input-wrapper">
+        {/* Input */}
+        <div className="input-container">
+          <div className="input-row">
+            <div className="name-input-wrapper">
+              <div className="input-with-icon">
                 <i className="fas fa-user input-icon" />
                 <input
                   type="text"
@@ -256,37 +214,37 @@ const RohanGPT = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="name-input"
-                  onKeyPress={handleKeyPress}
+                  maxLength={20}
                 />
               </div>
-              <div className="question-input-wrapper">
-                <i className="fas fa-message input-icon" />
+            </div>
+            <div className="message-input-wrapper">
+              <div className="input-with-icon">
+                <i className="fas fa-comment input-icon" />
                 <input
+                  ref={inputRef}
                   type="text"
                   placeholder="Ask RohanGPT anything..."
-                  value={question}
-                  onChange={(e) => setQuestion(e.target.value)}
-                  className="question-input"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
                   onKeyPress={handleKeyPress}
+                  className="message-input"
+                  maxLength={500}
                 />
               </div>
               <button
                 type="button"
                 onClick={askRohan}
-                disabled={loading || !name.trim() || !question.trim()}
+                disabled={!input.trim() || !name.trim() || loading}
                 className="send-button"
               >
-                {loading ? (
-                  <i className="fas fa-spinner fa-spin" />
-                ) : (
-                  'Send'
-                )}
+                Send
               </button>
             </div>
           </div>
         </div>
-      </article>
-    </Main>
+      </div>
+    </div>
   );
 };
 

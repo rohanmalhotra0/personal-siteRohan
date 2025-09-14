@@ -28,7 +28,7 @@ const App = () => (
         <Route path="/contact" element={<Contact />} />
         <Route path="/resume" element={<Resume />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="/rohanai" element={<RohanGPT />} />
+        <Route path="/rohanai" element={<Main><RohanGPT /></Main>} />
       </Routes>
     </Suspense>
   </BrowserRouter>

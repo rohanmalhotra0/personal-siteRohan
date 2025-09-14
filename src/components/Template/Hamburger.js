@@ -6,6 +6,20 @@ const Hamburger = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
+  const getIconForRoute = (route) => {
+    const iconMap = {
+      Home: 'fa-building',
+      About: 'fa-user',
+      Projects: 'fa-rocket',
+      Resume: 'fa-file-alt',
+      Research: 'fa-microscope',
+      Contact: 'fa-envelope',
+      Stats: 'fa-chart-bar',
+      RohanGPT: 'fa-robot',
+    };
+    return iconMap[route.label] || 'fa-circle';
+  };
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -65,38 +79,50 @@ const Hamburger = () => {
 
       <div className={`hamburger-overlay ${isOpen ? 'active' : ''}`} onClick={toggleMenu} />
 
-      <nav className={`hamburger-nav ${isOpen ? 'active' : ''}`}>
-        <div className="hamburger-nav-content">
-          <div style={{
-            padding: '20px',
-            color: 'white',
-            fontSize: '18px',
-            fontWeight: 'bold',
-            textAlign: 'center',
+      <nav
+        className={`hamburger-nav ${isOpen ? 'active' : ''}`}
+        style={{
+          maxWidth: '420px',
+          width: '85vw',
+        }}
+      >
+        <div
+          className="hamburger-nav-content"
+          style={{
+            padding: '8px 8px 12px 8px',
           }}
-          >
-            Navigation
-          </div>
+        >
           <ul className="hamburger-nav-list">
             {routes.map((route) => (
-              <li key={route.label} className="hamburger-nav-item">
+              <li
+                key={route.label}
+                className="hamburger-nav-item"
+                style={{
+                  borderBottom: '1px solid rgba(255, 255, 255, 0.12)',
+                  margin: 0,
+                }}
+              >
                 <button
                   type="button"
                   className={`hamburger-nav-link ${route.index ? 'home-link' : ''}`}
                   onClick={() => handleNavigation(route.path)}
                   style={{
-                    display: 'block',
+                    display: 'flex',
+                    alignItems: 'center',
                     width: '100%',
-                    padding: '15px 20px',
+                    padding: '16px 20px',
                     background: 'none',
                     border: 'none',
                     color: 'white',
-                    fontSize: '16px',
+                    fontSize: '15px',
+                    fontWeight: route.index ? 400 : 600,
                     textAlign: 'left',
                     cursor: 'pointer',
+                    gap: '16px',
                   }}
                 >
-                  {route.label}
+                  <i className={`fas ${getIconForRoute(route)}`} style={{ fontSize: '18px', width: '24px', textAlign: 'center' }} />
+                  {route.index ? 'Home' : route.label}
                 </button>
               </li>
             ))}
