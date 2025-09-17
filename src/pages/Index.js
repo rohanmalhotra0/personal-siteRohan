@@ -28,7 +28,7 @@ const Index = () => (
         <h3 className="video-title">Refrax Demo</h3>
         <div className="video-container">
           <iframe
-            src="https://www.youtube.com/embed/uU2eMfCStBs"
+            src="https://www.youtube.com/watch?v=J7e7Fx0Nu2A"
             title="Refrax Demo"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
