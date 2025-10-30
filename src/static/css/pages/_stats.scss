@@ -536,3 +536,67 @@
     }
   }
 }
+
+// Light mode overrides: make Research and Publications text white (with dark cards)
+#research {
+  .research-section,
+  .publications-section {
+    background: #0f141a;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+
+    .section-header {
+      border-bottom: 2px solid rgba(255, 255, 255, 0.12);
+
+      .section-icon { color: #a3bffa; }
+
+      h3 { color: #ffffff; }
+    }
+  }
+
+  .research-details {
+    .research-item {
+      background: #131a22;
+      border-left: 4px solid _palette(accent);
+
+      .research-bullet { color: #a3bffa; }
+
+      p { color: rgba(255, 255, 255, 0.92); }
+    }
+  }
+
+  .publications-grid {
+    .publication-card { background: #131a22; }
+
+    .publication-content {
+      .publication-meta {
+        .publication-date { color: rgba(255, 255, 255, 0.8); }
+
+        .publication-status { color: #ffffff; }
+      }
+
+      .publication-title {
+        a {
+          color: #ffffff;
+          &:hover { color: _palette(accent); }
+        }
+      }
+
+      .publication-abstract { color: rgba(255, 255, 255, 0.85); }
+
+      .publication-tags {
+        .tag {
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          color: #e0e7ff;
+
+          &:hover {
+            background: _palette(accent);
+            color: #ffffff;
+          }
+        }
+      }
+    }
+  }
+}
