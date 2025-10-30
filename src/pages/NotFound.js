@@ -8,7 +8,7 @@ const PageNotFound = () => (
       <Helmet title="404 Not Found">
         <meta
           name="description"
-          content="The content you are looking for cannot be found."
+          content="The content you are looking for cannot be found. Please check the URL and try again."
         />
       </Helmet>
       <h1>Page Not Found</h1>
