@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Main from '../layouts/Main';
+import { CardBody, CardContainer, CardItem } from '../components/ui/3d-card';
 
 const Stats = () => (
   <Main
@@ -10,12 +10,8 @@ const Stats = () => (
     <article className="post" id="research">
       <header>
         <div className="title">
-          <h2>
-            <Link to="/stats">Research & Publications</Link>
-          </h2>
-          <p>
-            My research and publications
-          </p>
+          <h2>Research & Publications</h2>
+          <p>My research and publications</p>
         </div>
       </header>
 
@@ -29,93 +25,96 @@ const Stats = () => (
           </div>
 
           <div className="publications-grid">
-            <div className="publication-card">
-              <div className="publication-image">
-                <img
-                  src={`${process.env.PUBLIC_URL}/images/reddit.png`}
-                  alt="Reddit Data in Quantitative Financial Models - Paper Preview"
-                />
-                <div className="publication-overlay">
-                  <a
-                    href={`${process.env.PUBLIC_URL}/images/research/reddit-paper.pdf`}
-                    download="Reddit Data in Quantitative Financial Models.pdf"
-                    className="view-paper-btn"
-                  >
-                    Download PDF
-                  </a>
+            <CardContainer>
+              <CardBody className="publication-card">
+                <CardItem translateZ={120} className="publication-image">
+                  <img
+                    src={`${process.env.PUBLIC_URL}/images/reddit.png`}
+                    alt="Reddit Data in Quantitative Financial Models - Paper Preview"
+                  />
+                  <div className="publication-overlay">
+                    <a
+                      href={`${process.env.PUBLIC_URL}/images/research/reddit-paper.pdf`}
+                      download="Reddit Data in Quantitative Financial Models.pdf"
+                      className="view-paper-btn"
+                    >
+                      Download PDF
+                    </a>
+                  </div>
+                </CardItem>
+                <div className="publication-content">
+                  <div className="publication-meta">
+                    <span className="publication-date">February 2025</span>
+                    <span className="publication-status published">Published</span>
+                  </div>
+                  <CardItem translateZ={70} as="h4" className="publication-title">
+                    <a
+                      href={`${process.env.PUBLIC_URL}/images/research/reddit-paper.pdf`}
+                      download="Reddit Data in Quantitative Financial Models.pdf"
+                    >
+                      Reddit Data in Quantitative Financial Models
+                    </a>
+                  </CardItem>
+                  <CardItem translateZ={50} as="p" className="publication-abstract">
+                    Explores Reddit-driven sentiment post-GME/AMC and its implications
+                    on market volatility. Analyzes the relationship between online
+                    sentiment spikes and financial market movements for predictive
+                    modeling applications.
+                  </CardItem>
+                  <div className="publication-tags">
+                    <span className="tag">Machine Learning</span>
+                    <span className="tag">Financial Modeling</span>
+                    <span className="tag">Sentiment Analysis</span>
+                    <span className="tag">Reddit API</span>
+                  </div>
                 </div>
-              </div>
-              <div className="publication-content">
-                <div className="publication-meta">
-                  <span className="publication-date">February 2025</span>
-                  <span className="publication-status published">Published</span>
-                </div>
-                <h4 className="publication-title">
-                  <a
-                    href={`${process.env.PUBLIC_URL}/images/research/reddit-paper.pdf`}
-                    download="Reddit Data in Quantitative Financial Models.pdf"
-                  >
-                    Reddit Data in Quantitative Financial Models
-                  </a>
-                </h4>
-                <p className="publication-abstract">
-                  Explores Reddit-driven sentiment post-GME/AMC and its implications on market
-                  volatility. Analyzes the relationship between online sentiment spikes and
-                  financial
-                  market movements for predictive modeling applications.
-                </p>
-                <div className="publication-tags">
-                  <span className="tag">Machine Learning</span>
-                  <span className="tag">Financial Modeling</span>
-                  <span className="tag">Sentiment Analysis</span>
-                  <span className="tag">Reddit API</span>
-                </div>
-              </div>
-            </div>
+              </CardBody>
+            </CardContainer>
 
-            <div className="publication-card">
-              <div className="publication-image">
-                <img
-                  src={`${process.env.PUBLIC_URL}/images/economic.png`}
-                  alt="An Economic Approach to Optimize Capital Allocation - Paper Preview"
-                />
-                <div className="publication-overlay">
-                  <a
-                    href={`${process.env.PUBLIC_URL}/images/research/capital-allocation-paper.pdf`}
-                    download="An Economic Approach to Optimize Capital Allocation.pdf"
-                    className="view-paper-btn"
-                  >
-                    Download PDF
-                  </a>
+            <CardContainer>
+              <CardBody className="publication-card">
+                <CardItem translateZ={120} className="publication-image">
+                  <img
+                    src={`${process.env.PUBLIC_URL}/images/economic.png`}
+                    alt="An Economic Approach to Optimize Capital Allocation - Paper Preview"
+                  />
+                  <div className="publication-overlay">
+                    <a
+                      href={`${process.env.PUBLIC_URL}/images/research/capital-allocation-paper.pdf`}
+                      download="An Economic Approach to Optimize Capital Allocation.pdf"
+                      className="view-paper-btn"
+                    >
+                      Download PDF
+                    </a>
+                  </div>
+                </CardItem>
+                <div className="publication-content">
+                  <div className="publication-meta">
+                    <span className="publication-date">November 2024</span>
+                    <span className="publication-status published">Published</span>
+                  </div>
+                  <CardItem translateZ={70} as="h4" className="publication-title">
+                    <a
+                      href={`${process.env.PUBLIC_URL}/images/research/capital-allocation-paper.pdf`}
+                      download="An Economic Approach to Optimize Capital Allocation.pdf"
+                    >
+                      An Economic Approach to Optimize Capital Allocation
+                    </a>
+                  </CardItem>
+                  <CardItem translateZ={50} as="p" className="publication-abstract">
+                    Applies the Kelly Criterion for maximizing capital growth through
+                    log-utility optimization. Proposes an economic framework for
+                    risk-adjusted return strategies and investment sizing models.
+                  </CardItem>
+                  <div className="publication-tags">
+                    <span className="tag">Economics</span>
+                    <span className="tag">Kelly Criterion</span>
+                    <span className="tag">Capital Allocation</span>
+                    <span className="tag">Risk Management</span>
+                  </div>
                 </div>
-              </div>
-              <div className="publication-content">
-                <div className="publication-meta">
-                  <span className="publication-date">November 2024</span>
-                  <span className="publication-status published">Published</span>
-                </div>
-                <h4 className="publication-title">
-                  <a
-                    href={`${process.env.PUBLIC_URL}/images/research/capital-allocation-paper.pdf`}
-                    download="An Economic Approach to Optimize Capital Allocation.pdf"
-                  >
-                    An Economic Approach to Optimize Capital Allocation
-                  </a>
-                </h4>
-                <p className="publication-abstract">
-                  Applies the Kelly Criterion for maximizing capital growth through log-utility
-                  optimization. Proposes an economic framework for risk-adjusted return strategies
-                  and
-                  investment sizing models.
-                </p>
-                <div className="publication-tags">
-                  <span className="tag">Economics</span>
-                  <span className="tag">Kelly Criterion</span>
-                  <span className="tag">Capital Allocation</span>
-                  <span className="tag">Risk Management</span>
-                </div>
-              </div>
-            </div>
+              </CardBody>
+            </CardContainer>
           </div>
         </div>
 

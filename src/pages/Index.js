@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Main from '../layouts/Main';
+import RefraxCard from '../components/Home/RefraxCard';
 
 const Index = () => (
   <Main description="Rohan Malhotra's personal website.">
@@ -23,19 +24,8 @@ const Index = () => (
         </div>
       </header>
 
-      {/* Video Section */}
-      <div className="video-section">
-        <h3 className="video-title">Refrax Demo</h3>
-        <div className="video-container">
-          <iframe
-            src="https://www.youtube.com/embed/J7e7Fx0Nu2A"
-            title="Refrax Demo"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-      </div>
+      {/* Refrax 3D Card */}
+      <RefraxCard />
 
       {/* Quick Links Section */}
       <div className="welcome-section">

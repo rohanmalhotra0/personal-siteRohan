@@ -25,7 +25,6 @@ const About = () => {
             </h2>
           </div>
         </header>
-
         <div className="about-content">
           <div className="about-intro">
             <div className="intro-card">
