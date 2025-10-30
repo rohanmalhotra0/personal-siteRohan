@@ -182,11 +182,11 @@
   // Projects: make the bottom description area black in dark mode
   .mini-post {
     .description {
-      background: rgba(255, 255, 255, 0.06) !important;
-      border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+      background: #1b2430 !important; // match top/header color
+      border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
 
       p {
-        background: #0f141a !important;
+        background: #1b2430 !important; // match top/header color
         color: #ffffff !important;
       }
     }
