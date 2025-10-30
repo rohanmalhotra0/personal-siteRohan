@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
-import { CardBody, CardContainer, CardItem } from '../ui/3d-card';
 
 const Cell = ({ data }) => (
-  <CardContainer className="cell-container">
-    <CardBody className="mini-post" style={{ padding: 0 }}>
+  <div className="cell-container">
+    <div className="mini-post" style={{ padding: 0 }}>
       <header style={{ padding: '2em 2em 0 2em' }}>
-        <CardItem translateZ={80} as="h3" className="">
+        <h3>
           {data.link ? (
             <a href={data.link} target="_blank" rel="noopener noreferrer">
               {data.title}
@@ -15,17 +14,23 @@ const Cell = ({ data }) => (
           ) : (
             <span>{data.title}</span>
           )}
-        </CardItem>
+        </h3>
         <time className="published">{dayjs(data.date).format('MMMM, YYYY')}</time>
       </header>
-      <CardItem translateZ={140} className="image" as={data.link ? 'a' : 'div'} {...(data.link ? { href: data.link, target: '_blank', rel: 'noopener noreferrer' } : {})}>
-        <img src={`${process.env.PUBLIC_URL}${data.image}`} alt={data.title} />
-      </CardItem>
+      {data.link ? (
+        <a className="image" href={data.link} target="_blank" rel="noopener noreferrer">
+          <img src={`${process.env.PUBLIC_URL}${data.image}`} alt={data.title} />
+        </a>
+      ) : (
+        <div className="image">
+          <img src={`${process.env.PUBLIC_URL}${data.image}`} alt={data.title} />
+        </div>
+      )}
       <div className="description">
-        <CardItem translateZ={60} as="p">{data.desc}</CardItem>
+        <p>{data.desc}</p>
       </div>
-    </CardBody>
-  </CardContainer>
+    </div>
+  </div>
 );
 
 Cell.propTypes = {
