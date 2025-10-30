@@ -20,6 +20,21 @@ const Hamburger = () => {
     return iconMap[route.label] || 'fa-circle';
   };
 
+  const [theme, setTheme] = useState('dark');
+
+  useEffect(() => {
+    const saved = localStorage.getItem('theme') || 'dark';
+    setTheme(saved);
+    document.documentElement.classList.toggle('theme-dark', saved === 'dark');
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    localStorage.setItem('theme', next);
+    document.documentElement.classList.toggle('theme-dark', next === 'dark');
+  };
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -121,11 +136,74 @@ const Hamburger = () => {
                     gap: '16px',
                   }}
                 >
-                  <i className={`fas ${getIconForRoute(route)}`} style={{ fontSize: '18px', width: '24px', textAlign: 'center' }} />
+                  <i
+                    className={`fas ${getIconForRoute(route)}`}
+                    style={{
+                      fontSize: '18px',
+                      width: '24px',
+                      textAlign: 'center',
+                    }}
+                  />
                   {route.index ? 'Home' : route.label}
                 </button>
               </li>
             ))}
+            {/* Theme toggle switch for mobile/iOS */}
+            <li className="hamburger-nav-item" style={{ borderBottom: 'none' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '14px 20px',
+                }}
+              >
+                <span
+                  style={{
+                    color: 'white',
+                    fontSize: 15,
+                    fontWeight: 500,
+                  }}
+                >
+                  Theme
+                </span>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={theme === 'dark'}
+                  aria-label={`Theme: ${theme}. Toggle light/dark mode`}
+                  onClick={toggleTheme}
+                  className={`hamburger-theme-toggle ${theme === 'dark' ? 'is-dark' : 'is-light'}`}
+                  style={{
+                    position: 'relative',
+                    width: 48,
+                    height: 26,
+                    borderRadius: 9999,
+                    border: '1px solid rgba(255,255,255,0.18)',
+                    background: 'rgba(255,255,255,0.12)',
+                    padding: 0,
+                    outline: 'none',
+                    boxShadow: 'none',
+                  }}
+                  title={theme === 'dark' ? 'Dark mode (tap for Light)' : 'Light mode (tap for Dark)'}
+                >
+                  <span
+                    className="hamburger-switch-thumb"
+                    style={{
+                      position: 'absolute',
+                      top: 2,
+                      left: 2,
+                      width: 22,
+                      height: 22,
+                      borderRadius: '50%',
+                      background: '#ffffff',
+                      transform: theme === 'dark' ? 'translateX(20px)' : 'translateX(0)',
+                      transition: 'transform 0.2s ease',
+                    }}
+                  />
+                </button>
+              </div>
+            </li>
           </ul>
         </div>
       </nav>

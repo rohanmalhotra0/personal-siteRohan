@@ -7,7 +7,7 @@
     text-align: center;
     margin-bottom: 3em;
     padding: 2em 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: _palette(accent);
     border-radius: 20px;
     color: white;
     position: relative;
@@ -114,7 +114,7 @@
           left: 0;
           width: 50px;
           height: 3px;
-          background: linear-gradient(135deg, #667eea, #764ba2);
+          background: _palette(accent);
           border-radius: 2px;
         }
       }
@@ -127,7 +127,7 @@
       align-items: flex-start;
       margin: 1.5em 0;
       padding: 1em;
-      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+      background: #ffffff;
       border-radius: 10px;
       border-left: 4px solid #667eea;
       transition: all 0.3s ease;
@@ -165,7 +165,7 @@
     margin-top: 2em;
 
     .publication-card {
-      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+      background: #ffffff;
       border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
@@ -208,7 +208,7 @@
           transition: opacity 0.3s ease;
 
           .view-paper-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: _palette(accent);
             color: white;
             padding: 0.8em 1.5em;
             border-radius: 25px;
@@ -255,10 +255,7 @@
             font-size: 0.8em;
             font-weight: 600;
 
-            &.published {
-              background: linear-gradient(135deg, #28a745, #20c997);
-              color: white;
-            }
+            &.published { background: #28a745; color: white; }
           }
         }
 
@@ -317,7 +314,7 @@
     margin-top: 2em;
 
     .interest-card {
-      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+      background: #ffffff;
       border-radius: 15px;
       padding: 2em;
       text-align: center;
@@ -496,7 +493,7 @@
       align-items: flex-start;
       margin: 1.5em 0;
       padding: 1em;
-      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+      background: #ffffff;
       border-radius: 10px;
       border-left: 4px solid #667eea;
       transition: all 0.3s ease;

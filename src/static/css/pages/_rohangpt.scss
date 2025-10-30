@@ -23,7 +23,7 @@
 
     // Header
     .chat-header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: _palette(accent);
       padding: 16px 20px;
       display: flex;
       align-items: center;

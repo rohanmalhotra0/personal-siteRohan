@@ -24,14 +24,7 @@ body {
   transition: all 0.3s ease;
 
   &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-    pointer-events: none;
+    content: none;
   }
 
   .nav-container {
@@ -86,10 +79,7 @@ body {
           color: #2c3e50;
           line-height: 1;
           margin-bottom: 0.1em;
-          background: linear-gradient(135deg, #667eea, #764ba2);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          color: _palette(accent);
         }
 
         .logo-subtitle {
@@ -133,16 +123,7 @@ body {
             position: relative;
             overflow: hidden;
 
-            &::before {
-              content: '';
-              position: absolute;
-              top: 0;
-              left: -100%;
-              width: 100%;
-              height: 100%;
-              background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-              transition: left 0.3s ease;
-            }
+            &::before { content: none; }
 
             &:hover {
               color: #667eea;
@@ -154,10 +135,7 @@ body {
                 left: 0;
               }
 
-              .nav-indicator {
-                width: 100%;
-                background: linear-gradient(135deg, #667eea, #764ba2);
-              }
+              .nav-indicator { width: 100%; background: _palette(accent); }
             }
 
             .nav-icon {
@@ -184,6 +162,84 @@ body {
               border-radius: 1px;
             }
           }
+        }
+
+        .theme-toggle {
+          @include vendor("display", "flex");
+          @include vendor("align-items", "center");
+          @include vendor("justify-content", "center");
+          padding: 0.8em 1.2em; // match nav-link
+          margin-left: 0.5em;
+          border-radius: 25px;
+          font-family: _font(family-heading);
+          font-size: 0.85em;
+          font-weight: 500;
+          letter-spacing: 0.3px;
+          text-transform: uppercase;
+          color: #495057;
+          background: transparent;
+          border: none; // match nav-link (no border)
+          outline: none;
+          -webkit-appearance: none;
+          appearance: none;
+          box-shadow: none;
+          cursor: pointer;
+          transition: all 0.3s ease;
+
+          i { margin-right: 6px; }
+
+          &:hover {
+            color: _palette(accent);
+            background: rgba(102, 126, 234, 0.05); // same hover as nav-link
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+          }
+        }
+
+        // Compact switch-style theme toggle
+        .theme-toggle-switch {
+          position: relative;
+          width: 48px;
+          height: 26px;
+          margin-left: 0.5em;
+          border-radius: 9999px;
+          border: 1px solid _palette(border);
+          background: rgba(102, 126, 234, 0.06);
+          cursor: pointer;
+          padding: 0;
+          outline: none;
+          box-shadow: none;
+          vertical-align: middle;
+          transition: background 0.2s ease, border-color 0.2s ease;
+
+          .switch-thumb {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: _palette(accent);
+            transition: transform 0.2s ease;
+          }
+
+          &:hover { background: rgba(102, 126, 234, 0.12); }
+
+          &.is-dark .switch-thumb { transform: translateX(20px); }
+        }
+
+        .theme-label {
+          margin-left: 0.5em;
+          display: inline-flex;
+          align-items: center;
+          height: 26px; // match switch height for perfect vertical alignment
+          vertical-align: middle;
+          font-family: _font(family-heading);
+          font-size: 0.85em;
+          font-weight: 500;
+          letter-spacing: 0.3px;
+          text-transform: uppercase;
+          color: #495057;
         }
       }
     }
@@ -450,7 +506,7 @@ body {
   right: -100%;
   width: 280px;
   height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: _palette(accent);
   box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3);
   transition: right 0.3s ease;
   z-index: 1000;
@@ -466,6 +522,15 @@ body {
 .hamburger-nav-content {
   padding: 80px 0 40px;
   height: 100%;
+}
+
+// Theme toggle in hamburger menu
+.hamburger-theme-toggle {
+  transition: background 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.18) !important;
+  }
 }
 
 .hamburger-nav-list {

@@ -76,6 +76,9 @@
 @import "pages/rohangpt";
 @import "pages/about";
 
+// Theme overrides must be last so they can override prior rules
+@import "base/theme";
+
 /* Resume Tab Styles - Added directly to ensure they're compiled */
 #resume .tab-navigation {
   display: flex;

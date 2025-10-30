@@ -50,3 +50,6 @@ nohup.out
 
 # Local Netlify folder
 .netlify
+.env.env
+.env
+.env.*

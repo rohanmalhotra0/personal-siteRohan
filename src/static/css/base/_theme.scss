@@ -1,0 +1,181 @@
+// Dark theme overrides
+
+.theme-dark {
+  color-scheme: dark;
+  // Force all text-style foregrounds to white in dark mode
+  *, *::before, *::after { color: #ffffff !important; }
+  // Base
+  body {
+    background: #0f141a;
+    color: #ffffff;
+  }
+
+  // Header
+  #header {
+    background: rgba(16, 21, 28, 0.9);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    .nav-link { color: #ffffff; }
+    .nav-link:hover {
+      color: _palette(accent);
+      background: rgba(102, 126, 234, 0.08);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+    }
+
+    .theme-toggle {
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.12);
+      &:hover { color: _palette(accent); border-color: _palette(accent); background: rgba(102, 126, 234, 0.08); }
+    }
+
+    .logo-subtitle { color: rgba(255, 255, 255, 0.9); }
+
+    .theme-toggle-switch {
+      border-color: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.08);
+      .switch-thumb { background: #ffffff; }
+    }
+
+    .theme-label { color: #ffffff; }
+  }
+
+  // Generic card/section containers
+  .post,
+  .intro-card,
+  .highlight-card,
+  .quick-links,
+  .quick-link,
+  .video-section,
+  .contact-method,
+  .social-section,
+  .publication-card,
+  .interest-card,
+  .research-section,
+  .publications-section,
+  .research-interests,
+  .cell-container,
+  .mini-post,
+  .mini-post header {
+    background: #1b2430 !important;
+    border-color: rgba(255, 255, 255, 0.06) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+    color: #ffffff;
+  }
+
+  // Typography: make all text white
+  h1, h2, h3, h4, h5, h6 { color: #ffffff; }
+  p, li, span, small, label, dt, dd { color: #ffffff; }
+
+  // Resume section headings (ensure not overridden by page styles)
+  .education .title h3,
+  .experience .title h3,
+  .skills .title h3,
+  .projects .title h3,
+  .courses .title h3,
+  .references .title h3 { color: #ffffff !important; }
+
+  // Links stay white on hover as well
+  a { color: #ffffff !important; }
+  a:hover { color: #ffffff !important; }
+
+  // Sidebar cards
+  .sidebar-intro-card,
+  .sidebar-blurb-card {
+    background: #17202a;
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  // About page list items
+  .about-sections ul li { background: #1b2430 !important; border-left-color: _palette(accent) !important; box-shadow: 0 2px 10px rgba(0,0,0,0.35); }
+
+  // Generic content lists inside posts
+  .post ul li { background: #1b2430 !important; border-color: rgba(255, 255, 255, 0.08) !important; }
+
+  // Table and form borders/text
+  table, th, td { border-color: rgba(255, 255, 255, 0.08); }
+  th, td { color: #ffffff; }
+  input, textarea, select { background: #121821; color: #ffffff; border-color: rgba(255, 255, 255, 0.12); }
+  input::placeholder, textarea::placeholder { color: #98a6b3; }
+
+  // Footer
+  #footer { color: #b7c0c8; }
+
+  // Page-specific paragraph overrides
+  .about-sections p,
+  .about-sections li,
+  .quick-link .link-content p,
+  #contact .contact-method .method-content p,
+  #research .research-item p,
+  #research .publication-abstract,
+  .interest-card p { color: #ffffff !important; }
+
+  // Resume page specific overrides (cards/sections)
+  #resume .tab-navigation {
+    background: rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  }
+  #resume .tab-button {
+    color: #ffffff !important;
+    background: transparent !important;
+  }
+  #resume .tab-button:hover { background: rgba(255, 255, 255, 0.08) !important; }
+  #resume .tab-button.active { background: rgba(255, 255, 255, 0.12) !important; }
+
+  .education,
+  .experience,
+  .skills,
+  .projects,
+  .courses,
+  .references {
+    background: #121821 !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+
+  .job-card,
+  .degree-card,
+  .project-item,
+  .skill-category,
+  .skill-item {
+    background: #1b2430 !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  // RohanGPT dark mode overrides
+  #rohangpt .mobile-chat-container { background: #121821 !important; color: #ffffff !important; }
+  #rohangpt .messages-container { background: #0f141a !important; }
+  #rohangpt .welcome-message { background: #1b2430 !important; color: #ffffff !important; }
+  #rohangpt .message.user .message-bubble { background: #2a2f3a !important; color: #ffffff !important; }
+  #rohangpt .input-container { background: #121821 !important; border-top: 1px solid rgba(255,255,255,0.12) !important; }
+  #rohangpt .message-input, 
+  #rohangpt .name-input { background: #1b2430 !important; color: #ffffff !important; border-color: rgba(255,255,255,0.15) !important; }
+  #rohangpt .message-input::placeholder,
+  #rohangpt .name-input::placeholder { color: #cfd6dd !important; }
+
+  .job-title,
+  .job-position,
+  .job-meta,
+  .job-dates,
+  .job-location,
+  .job-summary,
+  .summary-text,
+  .highlight-item,
+  .degree-title,
+  .school-info,
+  .school-link,
+  .project-name,
+  .project-year,
+  .project-description,
+  .project-technologies,
+  .project-highlight {
+    color: #ffffff !important;
+  }
+
+  .job-summary { background: #121821 !important; border-left-color: _palette(accent) !important; }
+  .project-highlights li { background: #1b2430 !important; border-color: rgba(255,255,255,0.08) !important; }
+
+  // Research page items
+  #research .research-item { background: #1b2430 !important; border-left-color: _palette(accent) !important; }
+}
