@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rohan Malhotra — One‑Page Portfolio (PDF‑Ready)</title>
+  <style>
+    /* ===== Base ===== */
+    :root { --ink:#0f172a; --muted:#475569; --line:#e5e7eb; --accent:#2563eb; --bg:#ffffff; --card:#ffffff; --shadow:0 10px 30px rgba(0,0,0,.06); }
+    @media (prefers-color-scheme: dark){ :root{ --bg:#0b1220; --ink:#e5e7eb; --muted:#9aa4b2; --line:#1f2937; --card:#0e1726; --shadow:0 10px 30px rgba(0,0,0,.25); } }
+    *{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{ margin:0; color:var(--ink); font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; background:var(--bg) }
+    a{ color:var(--accent); text-decoration:none }
+    a:hover{ text-decoration:underline }
+
+    /* ===== Sheet Layout ===== */
+    .sheet{ max-width:980px; margin:24px auto; padding:28px; border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); background:var(--card) }
+
+    header{ display:grid; grid-template-columns:1fr auto; gap:18px; align-items:center }
+    .avatar{ width:120px; height:120px; border-radius:16px; overflow:hidden; border:1px solid var(--line); background:#f8fafc; display:grid; place-items:center; font-weight:700; color:#64748b }
+    .avatar img{ width:100%; height:100%; object-fit:cover }
+    h1{ margin:0; font-size:30px; letter-spacing:.2px }
+    .tagline{ margin:6px 0 10px; color:var(--muted) }
+    .contact{ display:flex; flex-wrap:wrap; gap:8px; color:var(--muted) }
+    .pill{ padding:6px 10px; border:1px solid var(--line); border-radius:999px }
+    .summary{ margin:8px 0 0; color:var(--muted) }
+
+    .actions{ display:flex; gap:10px }
+    .btn{ padding:10px 12px; border-radius:10px; border:1px solid var(--line); background:var(--card); cursor:pointer }
+    .btn.primary{ background:var(--accent); color:#fff; border-color:transparent }
+
+    hr{ border:0; border-top:1px solid var(--line); margin:18px 0 }
+
+    /* ===== Sections ===== */
+    .grid{ display:grid; grid-template-columns: 1fr 1fr; gap:18px }
+    .full{ grid-column:1 / -1 }
+    h2{ font-size:13px; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); margin:0 0 8px }
+    .card{ padding:14px; border:1px solid var(--line); border-radius:14px; background:var(--card); box-shadow:var(--shadow) }
+    .card .card-row{ display:grid; grid-template-columns: 120px 1fr; gap:14px; align-items:center }
+    .thumb{ width:100%; height:100px; border-radius:10px; overflow:hidden; border:1px solid var(--line); background:#f8fafc }
+    .thumb.sm{ height:60px; margin-top:6px }
+    .thumb img{ width:100%; height:100%; object-fit:cover; display:block }
+    .card h3{ margin:0 0 6px; font-size:17px }
+    .card p{ margin:0 0 8px; color:var(--muted) }
+    .badges{ display:flex; flex-wrap:wrap; gap:6px; margin-top:6px }
+    .badge{ font-size:12px; padding:4px 8px; border-radius:999px; border:1px solid var(--line) }
+    ul{ margin:6px 0 0 18px }
+
+    /* Gallery */
+    .gallery{ display:grid; grid-template-columns: repeat(5, 1fr); gap:10px }
+    .tile{ aspect-ratio: 4/3; border-radius:12px; overflow:hidden; border:1px solid var(--line); background:#f8fafc }
+    .tile img{ width:100%; height:100%; object-fit:cover; display:block }
+
+    /* Responsive */
+    @media (max-width: 860px){
+      .grid{ grid-template-columns: 1fr }
+      .card .card-row{ grid-template-columns: 100px 1fr }
+      .gallery{ grid-template-columns: repeat(3, 1fr) }
+    }
+
+    footer{ margin-top:16px; color:var(--muted); font-size:12px; text-align:center }
+
+    /* ===== Print (PDF) ===== */
+    @media print{
+      body{ background:#fff; font-size:12px }
+      h1{ font-size:24px }
+      .grid{ gap:8px }
+      .card{ padding:8px }
+      .card .card-row{ grid-template-columns: 80px 1fr }
+      .thumb{ height:60px }
+      .thumb.sm{ height:45px }
+      .card, .card.full, .card .card-row{ break-inside: avoid; page-break-inside: avoid }
+      .sheet{ box-shadow:none; border:0; margin:0; max-width:none; padding:12px }
+      .actions{ display:none }
+      .card{ box-shadow:none }
+      a{ color:inherit; text-decoration:none }
+      .pill{ border:0; padding:0 }
+      .card{ border-color:#ddd }
+      @page{ size: A4; margin: 8mm }
+    }
+  </style>
+</head>
+<body>
+  <div class="sheet" id="sheet">
+    <header>
+      
+      <div>
+        <h1>Rohan Malhotra</h1>
+        <div class="tagline">CS × Math × Finance — I build simple data tools and accessible, real‑time products.</div>
+        <div class="contact">
+          <a class="pill" href="https://rohanm.org">rohanm.org</a>
+          <a class="pill" href="https://www.linkedin.com/in/rohanamal/">linkedin.com/in/rohanamal</a>
+          <a class="pill" href="https://github.com/rohanmalhotra0">github.com/rohanmalhotra0</a>
+          <span class="pill">973‑713‑3741</span>
+          <a class="pill" href="mailto:ram9952@nyu.edu">ram9952@nyu.edu</a>
+        </div>
+        <p class="summary">Engineer focused on data products and real time systems. I combine computer science math and finance to build tools that are simple and fast. I care about clear insights and applied research.</p>
+      </div>
+      <div class="actions no-print">
+        <button class="btn" onclick="window.open('https://rohanm.org','_blank')">Visit site</button>
+        <button class="btn primary" onclick="window.print()">Download PDF</button>
+      </div>
+    </header>
+
+    <hr/>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Personal Site</h2>
+        <div class="card-row">
+          <div class="thumb"><img src="public/profile.jpg" alt="Personal site"/></div>
+          <div>
+            <h3><a href="https://rohanm.org">rohanm.org</a></h3>
+            <ul>
+              <li>React and SCSS Jamstack with light and dark mode</li>
+              <li>Fast static export and PDF ready pages</li>
+              <li>Netlify functions for dynamic features</li>
+              <li>CI deploys to GitHub Pages</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>3D Data Modeling Site</h2>
+        <div class="card-row">
+          <div>
+            <div class="thumb"><img src="refrax2.png" alt="Refrax.io main"/></div>
+            <div class="thumb sm"><img src="refrax1.png" alt="Refrax screenshot"/></div>
+          </div>
+          <div>
+            <h3><a href="https://refrax.io">refrax.io</a> · <span>Demo:</span> <a href="https://www.youtube.com/watch?v=J7e7Fx0Nu2A&t=262s">YouTube</a></h3>
+            <ul>
+              <li>Website: <a href="https://refrax.io">refrax.io</a></li>
+              <li>Demo: <a href="https://www.youtube.com/watch?v=J7e7Fx0Nu2A&t=262s">YouTube</a></li>
+            </ul>
+            <ul>
+              <li>Upload CSV or Excel for instant 2D and 3D plots</li>
+              <li>Equation fitting and simple machine learning helpers</li>
+              <li>Responsive charts powered by Plotly and WebGL</li>
+              <li>Live demo available on YouTube</li>
+            </ul>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Green Sticker (Accessibility Tool)</h2>
+        <div class="card-row">
+          <div class="thumb"><img src="greensticker.png" alt="Green Sticker"/></div>
+          <div>
+            <h3><a href="https://greensticker.us">greensticker.us</a></h3>
+            <ul>
+              <li>Website: <a href="https://greensticker.us">greensticker.us</a></li>
+            </ul>
+            <ul>
+              <li>Hands free cursor using computer vision and a colored sticker</li>
+              <li>Runs on low cost hardware</li>
+              <li>Low latency interaction</li>
+              <li>Private by default with on device processing</li>
+            </ul>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Autism Research</h2>
+        <div class="card-row">
+          <div class="thumb"><img src="autism.png" alt="Autism Research"/></div>
+          <div>
+            <h3><a href="https://autismtester.com">autismtester.com</a></h3>
+            <ul>
+              <li>Website: <a href="https://autismtester.com">autismtester.com</a></li>
+            </ul>
+            <ul>
+              <li>Simple screening experiments and data collection</li>
+              <li>Accessible tools for non specialists</li>
+              <li>Prototype studies with clear UX</li>
+              <li>Public site for community feedback</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Pivot At VT</h2>
+        <div class="card-row">
+          <div class="thumb"><img src="pivot.png" alt="Pivot at VT"/></div>
+          <div>
+            <h3><a href="https://vtpivot.org">vtpivot.org</a></h3>
+            <ul>
+              <li>Website: <a href="https://vtpivot.org">vtpivot.org</a></li>
+            </ul>
+            <ul>
+              <li>Student led STEM community and project hub</li>
+              <li>Mentorship and project incubation</li>
+              <li>Workshops and events across campuses</li>
+              <li>Cross university collaboration</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card full">
+        <h2>Research Paper</h2>
+        <div class="card-row">
+          <div class="thumb"><img src="public/images/reddit.png" alt="Reddit Sentiment paper"/></div>
+          <div>
+            <h3><a href="https://hdl.handle.net/10919/124730">Reddit Sentiment in Financial Markets</a></h3>
+            <ul>
+              <li>Measured retail investor sentiment on Reddit</li>
+              <li>Built time series features and labels</li>
+              <li>Compared sentiment to realized volatility</li>
+              <li>Outlined risks and ethics</li>
+            </ul>
+            <ul>
+              <li>Paper: <a href="https://hdl.handle.net/10919/124730">hdl.handle.net/10919/124730</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card full">
+        <h2>Research Paper</h2>
+        <div class="card-row">
+          <div class="thumb"><img src="public/images/economic.png" alt="Kelly Criterion paper"/></div>
+          <div>
+            <h3><a href="https://hdl.handle.net/10919/124871">Capital Allocation with the Kelly Criterion</a></h3>
+            <ul>
+              <li>Implemented Kelly based allocation models</li>
+              <li>Backtested on historical market data</li>
+              <li>Analyzed drawdowns and growth rate</li>
+              <li>Derived practical sizing rules</li>
+            </ul>
+            <ul>
+              <li>Paper: <a href="https://hdl.handle.net/10919/124871">hdl.handle.net/10919/124871</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card full">
+        <h2>Research Paper</h2>
+        <div class="card-row">
+          <div class="thumb"><img src="public/images/cubesats.jpeg" alt="Aerospace Research"/></div>
+          <div>
+            <h3>Aerospace Research</h3>
+            <ul>
+              <li>Worked on CubeSat subsystems and integration</li>
+              <li>Built and tested ground station and comms</li>
+              <li>Prototyped flight software and control</li>
+              <li>Partnered with campus labs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Machine Learning RSI Predictor</h2>
+        <div class="card-row">
+          <div class="thumb"><img src="public/images/images (2).jpeg" alt="RSI Predictor"/></div>
+          <div>
+            <h3>Starbucks sales → SPY RSI</h3>
+            <ul>
+              <li>Engineered SMA MACD RSI and volume features</li>
+              <li>Trained a Random Forest baseline</li>
+              <li>Evaluated with cross validation</li>
+              <li>Visualized predictions over time</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Quantum Oscillating Stock Model</h2>
+        <div class="card-row">
+          <div class="thumb"><img src="public/images/download.png" alt="Quantum Oscillating Model"/></div>
+          <div>
+            <h3>Wave‑based cyclical prediction (SPY/QQQ)</h3>
+            <ul>
+              <li>Wave based cyclical signal construction</li>
+              <li>Scans SPY and QQQ for regime shifts</li>
+              <li>Screens for overvaluation and momentum</li>
+              <li>Automates data pulls and reports</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Linear Generator</h2>
+        <div class="card-row">
+          <div class="thumb"><img src="linear-generator-1.webp" alt="Linear Generator"/></div>
+          <div>
+            <h3>Linear Generator</h3>
+            <ul>
+              <li>Wearable generator using Faraday law</li>
+              <li>Harvests energy from everyday motion</li>
+              <li>Powers safety gear and small devices</li>
+              <li>Reduces grid demand while mobile</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Automated Raspberry Pi‑Based Binomial Options Pricing</h2>
+        <div class="card-row">
+          <div class="thumb"><img src="discreteOptions.jpeg" alt="Discrete-Options-System"/></div>
+          <div>
+            <h3>Discrete‑Options‑System</h3>
+            <ul>
+              <li>Raspberry Pi based compute and control</li>
+              <li>Streams live market data to a binomial tree</li>
+              <li>Prices options and selects trades</li>
+              <li>Executes orders with guardrails</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      
+
+      
+    </section>
+
+    <footer>
+      © <script>document.write(new Date().getFullYear())</script> Rohan Malhotra · Print this page to save as PDF.
+    </footer>
+  </div>
+</body>
+</html>
