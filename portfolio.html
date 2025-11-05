@@ -25,6 +25,9 @@
     .contact{ display:flex; flex-wrap:wrap; gap:8px; color:var(--muted) }
     .pill{ padding:6px 10px; border:1px solid var(--line); border-radius:999px }
     .summary{ margin:8px 0 0; color:var(--muted) }
+    .header-info{ background:#fff; color:#000; padding:10px; border-radius:12px; border:1px solid #e5e7eb; margin-top:8px }
+    .header-info a{ color:var(--accent) }
+    .header-info a:hover{ text-decoration:underline }
 
     .actions{ display:flex; gap:10px }
     .btn{ padding:10px 12px; border-radius:10px; border:1px solid var(--line); background:var(--card); cursor:pointer }
@@ -42,6 +45,8 @@
     .thumb.sm{ height:60px; margin-top:6px }
     .thumb img{ width:100%; height:100%; object-fit:cover; display:block }
     .card h3{ margin:0 0 6px; font-size:17px }
+    .card h3 a{ color:var(--ink); text-decoration:none }
+    .card h3 a:hover{ text-decoration:underline; color:var(--ink) }
     .card p{ margin:0 0 8px; color:var(--muted) }
     .badges{ display:flex; flex-wrap:wrap; gap:6px; margin-top:6px }
     .badge{ font-size:12px; padding:4px 8px; border-radius:999px; border:1px solid var(--line) }
@@ -63,7 +68,7 @@
 
     /* ===== Print (PDF) ===== */
     @media print{
-      body{ background:#fff; font-size:12px }
+      body{ background:#ffffff; font-size:12px; -webkit-print-color-adjust: exact; print-color-adjust: exact }
       h1{ font-size:24px }
       .grid{ gap:8px }
       .card{ padding:8px }
@@ -71,12 +76,13 @@
       .thumb{ height:60px }
       .thumb.sm{ height:45px }
       .card, .card.full, .card .card-row{ break-inside: avoid; page-break-inside: avoid }
-      .sheet{ box-shadow:none; border:0; margin:0; max-width:none; padding:12px }
+      .sheet{ box-shadow:none; border:0; margin:0; max-width:none; padding:12px; background:#ffffff }
       .actions{ display:none }
       .card{ box-shadow:none }
-      a{ color:inherit; text-decoration:none }
+      a{ color:#2563eb; text-decoration:none }
+      .card h3 a{ color:#000 !important }
       .pill{ border:0; padding:0 }
-      .card{ border-color:#ddd }
+      .card{ border-color:#c8dcff }
       @page{ size: A4; margin: 8mm }
     }
   </style>
@@ -87,15 +93,17 @@
       
       <div>
         <h1>Rohan Malhotra</h1>
-        <div class="tagline">CS × Math × Finance — I build simple data tools and accessible, real‑time products.</div>
-        <div class="contact">
-          <a class="pill" href="https://rohanm.org">rohanm.org</a>
-          <a class="pill" href="https://www.linkedin.com/in/rohanamal/">linkedin.com/in/rohanamal</a>
-          <a class="pill" href="https://github.com/rohanmalhotra0">github.com/rohanmalhotra0</a>
-          <span class="pill">973‑713‑3741</span>
-          <a class="pill" href="mailto:ram9952@nyu.edu">ram9952@nyu.edu</a>
+        <div class="header-info">
+          <div class="tagline">CS × Math × Finance — I build simple data tools and accessible, real‑time products.</div>
+          <div class="contact">
+            <a class="pill" href="https://rohanm.org">rohanm.org</a>
+            <a class="pill" href="https://www.linkedin.com/in/rohanamal/">linkedin.com/in/rohanamal</a>
+            <a class="pill" href="https://github.com/rohanmalhotra0">github.com/rohanmalhotra0</a>
+
+            <a class="pill" href="mailto:ram9952@nyu.edu">ram9952@nyu.edu</a>
+          </div>
+          <p class="summary">Engineer focused on data products and real time systems. I combine computer science math and finance to build tools that are simple and fast. I care about clear insights and applied research.</p>
         </div>
-        <p class="summary">Engineer focused on data products and real time systems. I combine computer science math and finance to build tools that are simple and fast. I care about clear insights and applied research.</p>
       </div>
       <div class="actions no-print">
         <button class="btn" onclick="window.open('https://rohanm.org','_blank')">Visit site</button>
@@ -126,14 +134,14 @@
         <h2>3D Data Modeling Site</h2>
         <div class="card-row">
           <div>
-            <div class="thumb"><img src="refrax2.png" alt="Refrax.io main"/></div>
-            <div class="thumb sm"><img src="refrax1.png" alt="Refrax screenshot"/></div>
+            <div class="thumb"><img src="public/images/refrax2.png" alt="Refrax.io main"/></div>
+            <div class="thumb sm"><img src="public/images/refrax1.png" alt="Refrax screenshot"/></div>
           </div>
           <div>
-            <h3><a href="https://refrax.io">refrax.io</a> · <span>Demo:</span> <a href="https://www.youtube.com/watch?v=J7e7Fx0Nu2A&t=262s">YouTube</a></h3>
+            <h3><a href="https://refrax.io">Refrax.io</a></h3>
             <ul>
               <li>Website: <a href="https://refrax.io">refrax.io</a></li>
-              <li>Demo: <a href="https://www.youtube.com/watch?v=J7e7Fx0Nu2A&t=262s">YouTube</a></li>
+              <li>Demo: <a href="https://www.youtube.com/watch?v=J7e7Fx0Nu2A">https://www.youtube.com/watch?v=J7e7Fx0Nu2A</a></li>
             </ul>
             <ul>
               <li>Upload CSV or Excel for instant 2D and 3D plots</li>
@@ -149,7 +157,7 @@
       <div class="card">
         <h2>Green Sticker (Accessibility Tool)</h2>
         <div class="card-row">
-          <div class="thumb"><img src="greensticker.png" alt="Green Sticker"/></div>
+          <div class="thumb"><img src="public/images/greensticker.png" alt="Green Sticker"/></div>
           <div>
             <h3><a href="https://greensticker.us">greensticker.us</a></h3>
             <ul>
@@ -169,7 +177,7 @@
       <div class="card">
         <h2>Autism Research</h2>
         <div class="card-row">
-          <div class="thumb"><img src="autism.png" alt="Autism Research"/></div>
+          <div class="thumb"><img src="public/images/autism.png" alt="Autism Research"/></div>
           <div>
             <h3><a href="https://autismtester.com">autismtester.com</a></h3>
             <ul>
@@ -188,7 +196,7 @@
       <div class="card">
         <h2>Pivot At VT</h2>
         <div class="card-row">
-          <div class="thumb"><img src="pivot.png" alt="Pivot at VT"/></div>
+          <div class="thumb"><img src="public/images/pivot.png" alt="Pivot at VT"/></div>
           <div>
             <h3><a href="https://vtpivot.org">vtpivot.org</a></h3>
             <ul>
@@ -293,7 +301,7 @@
       <div class="card">
         <h2>Linear Generator</h2>
         <div class="card-row">
-          <div class="thumb"><img src="linear-generator-1.webp" alt="Linear Generator"/></div>
+          <div class="thumb"><img src="public/images/linear-generator-1.webp" alt="Linear Generator"/></div>
           <div>
             <h3>Linear Generator</h3>
             <ul>
@@ -309,7 +317,7 @@
       <div class="card">
         <h2>Automated Raspberry Pi‑Based Binomial Options Pricing</h2>
         <div class="card-row">
-          <div class="thumb"><img src="discreteOptions.jpeg" alt="Discrete-Options-System"/></div>
+          <div class="thumb"><img src="public/images/discreteOptions.jpeg" alt="Discrete-Options-System"/></div>
           <div>
             <h3>Discrete‑Options‑System</h3>
             <ul>
@@ -327,9 +335,7 @@
       
     </section>
 
-    <footer>
-      © <script>document.write(new Date().getFullYear())</script> Rohan Malhotra · Print this page to save as PDF.
-    </footer>
+   
   </div>
 </body>
 </html>

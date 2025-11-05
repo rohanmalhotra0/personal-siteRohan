@@ -25,6 +25,16 @@ const work = [
     highlights: [],
   },
   {
+    name: 'Download Portfolio (PDF)',
+    position: 'One-page portfolio in PDF format.',
+    url: '/Rohan.Malhotra.Portfolio%20.pdf',
+    startDate: '2025-11-05',
+    endDate: '',
+    location: '',
+    summary: '',
+    highlights: [],
+  },
+  {
     name: 'ARESS Software',
     position: 'Machine Learning Intern',
     url: 'https://www.aress.com/',
