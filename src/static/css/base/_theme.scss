@@ -6,7 +6,7 @@
   *, *::before, *::after { color: #ffffff !important; }
   // Base
   body {
-    background: #0f141a;
+    background: #0a0c10;
     color: #ffffff;
   }
 
@@ -18,14 +18,14 @@
     .nav-link { color: #ffffff; }
     .nav-link:hover {
       color: _palette(accent);
-      background: rgba(102, 126, 234, 0.08);
+      background: rgba(24, 119, 242, 0.08);
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
     }
 
     .theme-toggle {
       color: #ffffff;
       border-color: rgba(255, 255, 255, 0.12);
-      &:hover { color: _palette(accent); border-color: _palette(accent); background: rgba(102, 126, 234, 0.08); }
+      &:hover { color: _palette(accent); border-color: _palette(accent); background: rgba(24, 119, 242, 0.08); }
     }
 
     .logo-subtitle { color: rgba(255, 255, 255, 0.9); }

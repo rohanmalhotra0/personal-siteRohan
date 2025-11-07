@@ -87,7 +87,7 @@
       align-items: center;
       margin-bottom: 2em;
       padding-bottom: 1em;
-      border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+      border-bottom: 2px solid rgba(24, 119, 242, 0.1);
 
       .section-icon {
         font-size: 2em;
@@ -139,7 +139,7 @@
 
       &:hover {
         transform: translateX(10px);
-        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        box-shadow: 0 5px 15px rgba(24, 119, 242, 0.2);
       }
 
       .research-bullet {
@@ -218,7 +218,7 @@
 
             &:hover {
               transform: scale(1.05);
-              box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+              box-shadow: 0 4px 15px rgba(24, 119, 242, 0.4);
             }
           }
         }
@@ -288,12 +288,12 @@
 
           .tag {
             padding: 0.3em 0.8em;
-            background: rgba(102, 126, 234, 0.1);
+            background: rgba(24, 119, 242, 0.1);
             color: #667eea;
             border-radius: 15px;
             font-size: 0.8em;
             font-weight: 500;
-            border: 1px solid rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(24, 119, 242, 0.2);
             transition: all 0.3s ease;
 
             &:hover {
@@ -319,7 +319,7 @@
       padding: 2em;
       text-align: center;
       transition: all 0.3s ease;
-      border: 1px solid rgba(102, 126, 234, 0.1);
+      border: 1px solid rgba(24, 119, 242, 0.1);
       animation: fadeInUp 0.6s ease;
       animation-fill-mode: both;
 
@@ -330,7 +330,7 @@
 
       &:hover {
         transform: translateY(-8px);
-        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.2);
+        box-shadow: 0 15px 35px rgba(24, 119, 242, 0.2);
         border-color: #667eea;
       }
 
@@ -507,7 +507,7 @@
 
       &:hover {
         transform: translateX(10px);
-        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        box-shadow: 0 5px 15px rgba(24, 119, 242, 0.2);
       }
 
       .research-bullet {
