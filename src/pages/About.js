@@ -7,12 +7,18 @@ const About = () => {
   const [markdown, setMarkdown] = useState('');
 
   useEffect(() => {
+    let isMounted = true;
     import('../data/about.md').then((res) => {
       fetch(res.default)
         .then((r) => r.text())
-        .then(setMarkdown);
+        .then((text) => {
+          if (isMounted) setMarkdown(text);
+        });
     });
-  });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <Main title="About" description="About Me">
