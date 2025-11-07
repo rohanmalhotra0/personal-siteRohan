@@ -6,7 +6,7 @@
   .post-header {
     text-align: center;
     margin-bottom: 3em;
-    padding: 2em 0;
+    padding: 0.6em 0;
     background: _palette(accent);
     border-radius: 20px;
     color: white;
@@ -29,9 +29,9 @@
       z-index: 1;
 
       h2 {
-        font-size: 2.1em;
+        font-size: 2.5em;
         font-weight: 700;
-        margin-bottom: 0.5em;
+        margin-bottom: 0.25em;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         display: flex;
         align-items: center;
@@ -339,11 +339,11 @@
 @media (max-width: 768px) {
   #about {
     .post-header {
-      padding: 1.5em 1em;
+      padding: 0.6em 1em;
 
       .title {
         h2 {
-          font-size: 2em;
+          font-size: 1.5em;
           flex-direction: column;
           gap: 0.25em;
         }
