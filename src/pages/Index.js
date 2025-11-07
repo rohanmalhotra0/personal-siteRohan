@@ -18,7 +18,6 @@ const Index = () => (
             </p>
             <p className="secondary-subtitle">
               Double Majoring in Computer Science & Mathematics <br />
-              Minor in Mathematics
             </p>
           </div>
         </div>
