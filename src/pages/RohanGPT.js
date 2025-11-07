@@ -189,7 +189,7 @@ const RohanGPT = () => {
         <div className="chat-header">
           <div className="header-content">
             <div className="bot-avatar">
-              <img src={`${PUBLIC_URL}/profile.jpg`} alt="Rohan" className="avatar-img" />
+              <img src={`${PUBLIC_URL}/profile.jpg`} alt="Rohan" className="avatar-img" loading="lazy" decoding="async" />
             </div>
             <div className="bot-info">
               <h3>RohanGPT</h3>
@@ -220,7 +220,7 @@ const RohanGPT = () => {
                     <span className="user-name">{msg.name ? msg.name.charAt(0).toUpperCase() : 'U'}</span>
                   </div>
                 ) : (
-                  <img src={`${PUBLIC_URL}/profile.jpg`} alt="Rohan" className="avatar-img" />
+                  <img src={`${PUBLIC_URL}/profile.jpg`} alt="Rohan" className="avatar-img" loading="lazy" decoding="async" />
                 )}
               </div>
               <div className="message-content">
@@ -235,7 +235,7 @@ const RohanGPT = () => {
           {loading && (
             <div className="message bot">
               <div className="message-avatar">
-                <img src={`${PUBLIC_URL}/profile.jpg`} alt="Rohan" className="avatar-img" />
+                <img src={`${PUBLIC_URL}/profile.jpg`} alt="Rohan" className="avatar-img" loading="lazy" decoding="async" />
               </div>
               <div className="message-content">
                 <div className="typing-indicator">

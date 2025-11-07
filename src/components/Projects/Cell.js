@@ -19,11 +19,11 @@ const Cell = ({ data }) => (
       </header>
       {data.link ? (
         <a className="image" href={data.link} target="_blank" rel="noopener noreferrer">
-          <img src={`${process.env.PUBLIC_URL}${data.image}`} alt={data.title} />
+          <img src={`${process.env.PUBLIC_URL}${data.image}`} alt={data.title} loading="lazy" decoding="async" />
         </a>
       ) : (
         <div className="image">
-          <img src={`${process.env.PUBLIC_URL}${data.image}`} alt={data.title} />
+          <img src={`${process.env.PUBLIC_URL}${data.image}`} alt={data.title} loading="lazy" decoding="async" />
         </div>
       )}
       <div className="description">
