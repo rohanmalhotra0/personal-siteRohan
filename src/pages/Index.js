@@ -17,7 +17,7 @@ const Index = () => (
               Sophomore at NYU Courant Institute
             </p>
             <p className="secondary-subtitle">
-              Double Majoring in Computer Science & Economics <br />
+              Double Majoring in Computer Science & Mathematics <br />
               Minor in Mathematics
             </p>
           </div>

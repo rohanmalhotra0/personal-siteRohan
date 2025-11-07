@@ -156,10 +156,10 @@
     .quick-links {
       margin: 2.5em 0;
       padding: 2em;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.85);
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      backdrop-filter: saturate(160%) blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.3);
 
       h3 {
@@ -192,7 +192,7 @@
           display: flex;
           align-items: center;
           padding: 1.5em;
-          background: #ffffff;
+          background: rgba(255, 255, 255, 0.8);
           border-radius: 15px;
           text-decoration: none;
           color: inherit;
@@ -212,7 +212,7 @@
 
           &:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(24, 119, 242, 0.2);
+            box-shadow: 0 15px 35px rgba(24, 119, 242, 0.18);
             border-color: #667eea;
 
             &::before {

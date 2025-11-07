@@ -12,7 +12,7 @@
 
   // Header
   #header {
-    background: rgba(16, 21, 28, 0.9);
+    background: rgba(16, 21, 28, 0.8);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 
     .nav-link { color: #ffffff; }
@@ -56,7 +56,7 @@
   .cell-container,
   .mini-post,
   .mini-post header {
-    background: #1b2430 !important;
+    background: rgba(27, 36, 48, 0.85) !important;
     border-color: rgba(255, 255, 255, 0.06) !important;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
     color: #ffffff;
@@ -95,7 +95,7 @@
   // Table and form borders/text
   table, th, td { border-color: rgba(255, 255, 255, 0.08); }
   th, td { color: #ffffff; }
-  input, textarea, select { background: #121821; color: #ffffff; border-color: rgba(255, 255, 255, 0.12); }
+  input, textarea, select { background: rgba(18, 24, 33, 0.85); color: #ffffff; border-color: rgba(255, 255, 255, 0.12); backdrop-filter: saturate(150%) blur(8px); }
   input::placeholder, textarea::placeholder { color: #98a6b3; }
 
   // Footer
@@ -144,11 +144,11 @@
   }
 
   // RohanGPT dark mode overrides
-  #rohangpt .mobile-chat-container { background: #121821 !important; color: #ffffff !important; }
-  #rohangpt .messages-container { background: #0f141a !important; }
-  #rohangpt .welcome-message { background: #1b2430 !important; color: #ffffff !important; }
-  #rohangpt .message.user .message-bubble { background: #2a2f3a !important; color: #ffffff !important; }
-  #rohangpt .input-container { background: #121821 !important; border-top: 1px solid rgba(255,255,255,0.12) !important; }
+  #rohangpt .mobile-chat-container { background: rgba(18,24,33,0.85) !important; color: #ffffff !important; backdrop-filter: saturate(150%) blur(10px); }
+  #rohangpt .messages-container { background: rgba(10, 12, 16, 0.9) !important; }
+  #rohangpt .welcome-message { background: rgba(27,36,48,0.85) !important; color: #ffffff !important; }
+  #rohangpt .message.user .message-bubble { background: rgba(42,47,58,0.85) !important; color: #ffffff !important; }
+  #rohangpt .input-container { background: rgba(18,24,33,0.85) !important; border-top: 1px solid rgba(255,255,255,0.12) !important; backdrop-filter: saturate(150%) blur(10px); }
   #rohangpt .message-input, 
   #rohangpt .name-input { background: #1b2430 !important; color: #ffffff !important; border-color: rgba(255,255,255,0.15) !important; }
   #rohangpt .message-input::placeholder,
