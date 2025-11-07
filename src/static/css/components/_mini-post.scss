@@ -12,11 +12,12 @@
   overflow: hidden;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
   transition: all 0.4s ease;
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.45);
   animation: fadeInUp 0.8s ease forwards;
   opacity: 0;
   transform: translateY(40px);
   backdrop-filter: saturate(160%) blur(12px);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.3);
 
   &:nth-child(1) { animation-delay: 0.1s; }
@@ -57,13 +58,14 @@
       font-size: 0.95rem;
       margin: 0;
       padding: 2em;
-      background: rgba(255, 255, 255, 0.65);
+      background: rgba(255, 255, 255, 0.5);
       color: #2c3e50;
       font-family: "Raleway", Helvetica, sans-serif;
       z-index: 1000;
       transition: all 0.4s ease;
       -webkit-transition: all 0.4s ease;
       backdrop-filter: saturate(180%) blur(16px);
+      -webkit-backdrop-filter: saturate(180%) blur(16px);
       border-radius: 0 0 20px 20px;
       line-height: 1.6;
       font-weight: 400;
@@ -135,7 +137,7 @@
     min-height: 6em;
     position: relative;
     @include vendor("flex-grow", "1");
-    background: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.6);
     border-radius: 0 0 20px 20px;
 
     h3 {

@@ -188,11 +188,12 @@
 .references {
   margin: 0;
   padding: 2em;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.45);
   border-radius: 15px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
   backdrop-filter: saturate(180%) blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.24);
   transition: all 0.3s ease;
 }
 
@@ -200,7 +201,7 @@
 .job-card {
   margin-bottom: 2em;
   padding: 1.5em;
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.42);
   border-radius: 12px;
   border-left: 4px solid #1877f2;
   transition: all 0.3s ease;
@@ -319,7 +320,7 @@
 .degree-card {
   margin-bottom: 1.5em;
   padding: 1.5em;
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.42);
   border-radius: 12px;
   border-left: 4px solid #1877f2;
   transition: all 0.3s ease;
@@ -405,7 +406,7 @@
 .skill-category:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.7);
 }
 
 .category-title {
@@ -429,10 +430,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.8em 1em;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.5);
   border-radius: 8px;
   transition: all 0.3s ease;
-  border: 1px solid rgba(24, 119, 242, 0.1);
+  border: 1px solid rgba(24, 119, 242, 0.18);
 }
 
 .skill-item:hover {
@@ -604,7 +605,7 @@
 .project-item {
   margin-bottom: 2em;
   padding: 1.5em;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.45);
   border-radius: 12px;
   border-left: 4px solid #4f73df; /* bluish accent */
   transition: all 0.3s ease;
