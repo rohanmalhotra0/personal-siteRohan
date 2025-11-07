@@ -40,7 +40,7 @@ const About = () => {
               <div className="intro-text">
                 <h3>Student at NYU Courant </h3>
                 <p>
-                  Computer Science and Economics student at NYU, passionate about
+                  Computer Science and Mathematics student at NYU, passionate about
                   leveraging data science, machine learning, and analytics to drive
                   impactful solutions.
                 </p>
