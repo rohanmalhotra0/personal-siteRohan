@@ -1,56 +1,112 @@
-// TODO Add a couple lines about each project
+// Projects page dataset
+// Images prioritized from public/images/projects; rohanm.org intentionally excluded
 const data = [
+  // Projects
   {
     title: 'Refrax.io',
-    subtitle: 'Interactive Financial & Scientific Visualization Platform',
+    subtitle: 'Interactive financial & scientific visualization',
     link: 'https://refrax.io',
-    image: '/images/refrax.png',
+    image: '/images/refrax2.png',
     date: '2025-01-20',
     desc:
-      'Refrax.io (2025–Present) – Platform for interactive financial, mathematical, and scientific visualization. '
-      + 'Built with Three.js, Plotly.js, machine learning, and backend APIs.',
+      'Upload CSV/Excel for instant 2D/3D plots. Equation fitting and simple ML helpers. '
+      + 'Plotly + WebGL responsive charts. Live demo: youtube.com/watch?v=J7e7Fx0Nu2A.',
   },
   {
-    title: 'Reddit Sentiment & Market Volatility',
-    subtitle: 'Published at VTechWorks, Feb 2025',
-    link: 'https://vtechworks.lib.vt.edu/items/046554a1-c4b0-46b0-b674-f4d62a490c27',
+    title: 'Green Sticker (Accessibility Tool)',
+    subtitle: 'Hands-free cursor via computer vision',
+    link: 'https://greensticker.us',
+    image: '/images/greensticker.png',
+    date: '2024-08-01',
+    desc:
+      'Hands-free cursor using a colored sticker and on-device computer vision. '
+      + 'Runs on low-cost hardware with low latency; private by default.',
+  },
+  {
+    title: 'Autism Research',
+    subtitle: 'Simple screening experiments & data collection',
+    link: 'https://autismtester.com',
+    image: '/images/autism.png',
+    date: '2024-05-01',
+    desc:
+      'Accessible tools for non-specialists. Prototype studies with clear UX. '
+      + 'Public site for community feedback.',
+  },
+
+  // Organizations
+  {
+    title: 'Pivot at VT',
+    subtitle: 'Student-led STEM community & project hub',
+    link: 'https://vtpivot.org',
+    image: '/images/pivot.png',
+    date: '2023-09-01',
+    desc:
+      'Mentorship, project incubation, workshops, and cross-university collaboration.',
+  },
+
+  // Publications
+  {
+    title: 'Reddit Sentiment in Financial Markets',
+    subtitle: 'Publication',
+    link: 'https://hdl.handle.net/10919/124730',
     image: '/images/reddit.png',
     date: '2025-02-10',
     desc:
-      'Analyzed Reddit posts to gauge retail investor sentiment post-GME/AMC. '
-      + 'Assessed correlations with market volatility, highlighting the influence of social media '
-      + 'on short-term financial movements and ethical considerations of such models.',
+      'Measured Reddit retail sentiment, built time-series features, compared to realized volatility, '
+      + 'and outlined risks/ethics.',
   },
   {
-    title: 'Capital Allocation via the Kelly Criterion',
-    subtitle: 'Published at VTechWorks, Nov 2024',
-    link: 'https://vtechworks.lib.vt.edu/items/d2396f35-c165-4156-80b4-95bb2af8ecd8',
+    title: 'Capital Allocation with the Kelly Criterion',
+    subtitle: 'Publication',
+    link: 'https://hdl.handle.net/10919/124871',
     image: '/images/economic.png',
     date: '2024-11-20',
     desc:
-      'Proposed an economic framework to optimize capital allocation using the Kelly Criterion. '
-      + 'Focused on maximizing long-term logarithmic utility through risk-adjusted return strategies '
-      + 'and investment sizing models.',
+      'Implemented Kelly-based sizing, backtested on historical data, analyzed drawdowns and growth, '
+      + 'derived practical rules.',
   },
   {
-    title: 'Machine Learning RSI Predictor',
-    subtitle: 'Used Starbucks coffee sales data to forecast SPY RSI',
-    image: '/images/images (2).jpeg', // Replace with your actual image path
+    title: 'Aerospace Research (CubeSat)',
+    subtitle: 'Research & prototyping',
+    image: '/images/cubesats.jpeg',
+    date: '2023-06-01',
+    desc:
+      'Subsystems and integration, ground station/comms, prototyped flight software/control, '
+      + 'partnered with campus labs.',
+  },
+
+  // Selected Experiments & Models
+  {
+    title: 'Machine-Learning RSI Predictor (Starbucks sales → SPY RSI)',
+    subtitle: 'Experiments',
+    image: '/images/images (2).jpeg',
     date: '2025-01-15',
     desc:
-      'Developed a Random Forest model to predict the Relative Strength Index (RSI) '
-      + 'using Starbucks regional coffee sales. Engineered features such as SMA, MACD, RSI, and Volume, '
-      + 'and compared multiple algorithms for optimal accuracy.',
+      'Engineered SMA, MACD, RSI, and volume features. Random Forest baseline with cross-validation and time-series viz.',
   },
   {
-    title: 'Quantum Oscillating Physics Stock Model',
-    subtitle: 'Wave-based cyclical prediction using SPY and QQQ',
-    image: '/images/download.png', // Replace with your actual image path
+    title: 'Quantum-Oscillating Stock Model (SPY/QQQ)',
+    subtitle: 'Signals & screening',
+    image: '/images/displacement.png',
     date: '2025-06-01',
     desc:
-      'Applied physics-based oscillation formulas to model cyclical mispricings in financial markets. '
-      + 'Automated data collection via Polygon API and Google Sheets, enabling overvaluation screening '
-      + 'based on cyclical trends and momentum shifts.',
+      'Wave-based cyclical signals, regime scans, overvaluation/momentum screens, automated data pulls/reports.',
+  },
+  {
+    title: 'Linear Generator',
+    subtitle: 'Hardware prototype',
+    image: '/images/linear-generator-1.webp',
+    date: '2024-04-01',
+    desc:
+      'Wearable Faraday-law generator harvesting motion to power small devices and safety gear.',
+  },
+  {
+    title: 'Automated Raspberry Pi–based Binomial Options Pricing',
+    subtitle: 'Automation',
+    image: '/images/discreteOptions.jpeg',
+    date: '2023-12-01',
+    desc:
+      'Streams live data into a binomial tree, prices options, selects trades, and executes with guardrails.',
   },
 ];
 
