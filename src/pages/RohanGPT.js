@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 
-const RohanGPT = () => {
+const RohanGPT = ({ rootId, messagePlaceholder }) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [name, setName] = useState('');
@@ -183,7 +184,7 @@ const RohanGPT = () => {
   };
 
   return (
-    <div id="rohangpt">
+    <div id={rootId}>
       <div className="mobile-chat-container">
         {/* Header */}
         <div className="chat-header">
@@ -256,7 +257,7 @@ const RohanGPT = () => {
                 <i className="fas fa-comment input-icon" />
                 <textarea
                   ref={inputRef}
-                  placeholder="Ask RohanGPT anything..."
+                  placeholder={messagePlaceholder}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={handleKeyPress}
@@ -294,6 +295,16 @@ const RohanGPT = () => {
       </div>
     </div>
   );
+};
+
+RohanGPT.propTypes = {
+  rootId: PropTypes.string,
+  messagePlaceholder: PropTypes.string,
+};
+
+RohanGPT.defaultProps = {
+  rootId: 'rohangpt',
+  messagePlaceholder: 'Ask RohanGPT anything...',
 };
 
 export default RohanGPT;

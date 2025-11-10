@@ -17,7 +17,7 @@ Notable achievements include founding a volunteer program teaching coding to spe
 
 - I have an arm disability called radial ulnar synotosis, basically I can't flip my hands such that they are underhanded. 
 - I grew up in Chatham New Jersey but was born in Freemont California
-- I LOVE cooking and it has been a passion of mine since I was a kid watching my mom cook while I sat on the kitchen counter
+- I love cooking and it has been a passion of mine since I was a kid watching my mom cook while I sat on the kitchen counter
 
 
 
