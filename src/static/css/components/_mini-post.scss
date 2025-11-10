@@ -184,19 +184,15 @@
 
 .mini-posts {
   margin: 0 0 _size(element-margin);
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 2em;
   padding: 1em 0;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
 
-  @include breakpoint(medium) {
-    gap: 1.5em;
-    padding: 0.5em 0;
-  }
-
+  @include breakpoint(small) { grid-template-columns: 1fr; }
   @include breakpoint(xsmall) {
     gap: 1em;
     margin: 0;
