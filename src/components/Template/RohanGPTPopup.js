@@ -13,18 +13,11 @@ const RohanGPTPopup = () => {
     navigate('/rohanai');
   };
 
-  // Theme detection
-  // Priority: explicit site theme classes > OS preference
+  // Theme detection: match site theme (no OS fallback)
   let isDark = false;
   if (typeof document !== 'undefined') {
     const root = document.documentElement;
-    const hasDark = root.classList.contains('theme-dark') || document.body.classList.contains('theme-dark');
-    const hasLight = root.classList.contains('theme-light') || document.body.classList.contains('theme-light');
-    if (hasDark) isDark = true;
-    else if (hasLight) isDark = false;
-    else if (typeof window !== 'undefined' && window.matchMedia) {
-      isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
+    isDark = root.classList.contains('theme-dark') || document.body.classList.contains('theme-dark');
   }
 
   const colors = {
@@ -62,6 +55,7 @@ const RohanGPTPopup = () => {
       color: #0a0c10 !important;
       border: 1px solid rgba(0,0,0,0.08) !important;
     }
+    #rohangpt-popup .welcome-message h4 { color: #0a0c10 !important; }
     #rohangpt-popup .message.user .message-bubble {
       background: #f4f7fb !important;
       color: #0a0c10 !important;
@@ -188,15 +182,15 @@ const RohanGPTPopup = () => {
                 gap: '10px',
               }}
             >
-              <strong style={{ fontSize: '0.95rem', color: '#ffffff' }}>RohanGPT</strong>
+              <strong style={{ fontSize: '0.95rem', color: colors.text }}>RohanGPT</strong>
               <div />
               <button
                 type="button"
                 onClick={goFull}
                 style={{
-                  border: isDark ? `1px solid ${colors.primaryBorder}` : '1px solid rgba(255,255,255,0.75)',
-                  background: isDark ? colors.primaryBg : 'rgba(255,255,255,0.15)',
-                  color: '#ffffff',
+                  border: `1px solid ${isDark ? colors.primaryBorder : 'rgba(0,0,0,0.12)'}`,
+                  background: isDark ? colors.primaryBg : '#ffffff',
+                  color: colors.text,
                   borderRadius: '10px',
                   display: 'inline-flex',
                   alignItems: 'center',
