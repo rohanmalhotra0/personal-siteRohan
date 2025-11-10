@@ -3,6 +3,20 @@ import { useNavigate } from 'react-router-dom';
 
 const RohanGPTPopup = () => {
   const [open, setOpen] = useState(false);
+  const detectDark = () => {
+    if (typeof document === 'undefined') return false;
+    const root = document.documentElement;
+    const body = document.body;
+    const hasThemeDarkClass =
+      (root && root.classList.contains('theme-dark')) ||
+      (body && body.classList.contains('theme-dark')) ||
+      !!document.querySelector('.theme-dark');
+    const dataThemeDark =
+      (root && root.getAttribute('data-theme') === 'dark') ||
+      (body && body.getAttribute('data-theme') === 'dark');
+    return hasThemeDarkClass || dataThemeDark;
+  };
+  const [isDark, setIsDark] = useState(detectDark);
   const [messages, setMessages] = useState(() => {
     try {
       const raw = window.localStorage.getItem('popup_rgpt_messages');
@@ -51,12 +65,46 @@ const RohanGPTPopup = () => {
     }
   }, [messages, open]);
 
-  // Theme detection: match site theme (no OS fallback)
-  let isDark = false;
-  if (typeof document !== 'undefined') {
+  // Theme detection: react instantly to site theme class changes
+  useEffect(() => {
+    if (typeof document === 'undefined' || typeof MutationObserver === 'undefined') return undefined;
     const root = document.documentElement;
-    isDark = root.classList.contains('theme-dark') || document.body.classList.contains('theme-dark');
-  }
+    const body = document.body;
+    const update = () => {
+      const next = detectDark();
+      setIsDark((prev) => (prev === next ? prev : next));
+    };
+    const observer = new MutationObserver((mutations) => {
+      for (let i = 0; i < mutations.length; i += 1) {
+        const m = mutations[i];
+        if (m.type === 'attributes' && (m.attributeName === 'class' || m.attributeName === 'data-theme')) {
+          update();
+          break;
+        }
+      }
+    });
+    observer.observe(root, { attributes: true, attributeFilter: ['class', 'data-theme'], subtree: true });
+    if (body) observer.observe(body, { attributes: true, attributeFilter: ['class', 'data-theme'], subtree: true });
+    // Optional: support custom theme change events if emitted elsewhere
+    const handler = () => update();
+    window.addEventListener('themechange', handler);
+    // React to OS-level dark mode preference changes as a fallback
+    const media =
+      typeof window !== 'undefined' && window.matchMedia
+        ? window.matchMedia('(prefers-color-scheme: dark)')
+        : null;
+    const mediaHandler = () => update();
+    if (media && media.addEventListener) media.addEventListener('change', mediaHandler);
+    else if (media && media.addListener) media.addListener(mediaHandler);
+    // Initial sync in case we mounted mid-toggle
+    update();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('themechange', handler);
+      if (media && media.removeEventListener) media.removeEventListener('change', mediaHandler);
+      else if (media && media.removeListener) media.removeListener(mediaHandler);
+    };
+  }, []);
 
   const colors = {
     // Floating icon button
