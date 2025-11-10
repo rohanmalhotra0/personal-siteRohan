@@ -14,9 +14,17 @@ const About = () => {
   const importAll = (r) => r.keys().map((key) => ({ key, src: r(key) }));
   const galleryImages = useMemo(() => {
     try {
-      const imgs = importAll(require.context('../assets/photos-of-me', false, /\.(png|jpe?g|webp)$/));
-      const sorted = imgs.sort((a, b) => a.key.localeCompare(b.key));
-      return sorted.slice(1); // remove the first image from the collage
+      const imgs = importAll(require.context('../assets/photos-of-me', false, /\.(png|PNG|jpe?g|JPE?G|webp|WEBP)$/));
+      // Keep only files named "Photo <number>.*" and sort numerically
+      const withNumbers = imgs
+        .map((it) => {
+          const base = it.key.replace('./', '');
+          const match = base.match(/Photo\s*(\d+)/i);
+          return match ? { ...it, order: parseInt(match[1], 10) } : null;
+        })
+        .filter(Boolean);
+      const sorted = withNumbers.sort((a, b) => a.order - b.order);
+      return sorted;
     } catch (e) {
       return [];
     }
