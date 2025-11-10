@@ -15,7 +15,8 @@ const About = () => {
   const galleryImages = useMemo(() => {
     try {
       const imgs = importAll(require.context('../assets/photos-of-me', false, /\.(png|jpe?g|webp)$/));
-      return imgs.sort((a, b) => a.key.localeCompare(b.key));
+      const sorted = imgs.sort((a, b) => a.key.localeCompare(b.key));
+      return sorted.slice(1); // remove the first image from the collage
     } catch (e) {
       return [];
     }
