@@ -1,6 +1,6 @@
 const degrees = [
   {
-    school: 'New York University, Courant Institute',
+    school: 'New York University, Courant ',
     degree: 'B.A. Computer Science and Mathematics; Minor in Mathematics',
     link: 'https://courant.nyu.edu',
     year: 2027,

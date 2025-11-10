@@ -29,7 +29,7 @@ const RefraxCard = ({ className }) => {
               <img
                 src={THUMB_MAX}
                 srcSet={`${THUMB_MAX} 1280w, ${THUMB_SD} 640w, ${THUMB_HQ} 480w`}
-                sizes="(max-width: 600px) 100vw, 900px"
+                sizes="(max-width: 600px) 100vw, 720px"
                 alt="Refrax Demo thumbnail"
                 loading="lazy"
                 decoding="async"

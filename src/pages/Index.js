@@ -14,7 +14,7 @@ const Index = () => (
           </h2>
           <div className="subtitle">
             <p className="main-subtitle">
-              Sophomore at NYU Courant Institute
+              Junior at NYU Courant
             </p>
             <p className="secondary-subtitle">
               Double Majoring in Computer Science & Mathematics <br />

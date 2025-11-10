@@ -1,10 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+} from 'react';
 import Markdown from 'markdown-to-jsx';
 
 import Main from '../layouts/Main';
 
 const About = () => {
   const [markdown, setMarkdown] = useState('');
+  const galleryRef = useRef(null);
+  const importAll = (r) => r.keys().map((key) => ({ key, src: r(key) }));
+  const galleryImages = useMemo(() => {
+    try {
+      const imgs = importAll(require.context('../assets/photos-of-me', false, /\.(png|jpe?g|webp)$/));
+      return imgs.sort((a, b) => a.key.localeCompare(b.key));
+    } catch (e) {
+      return [];
+    }
+  }, []);
+  const handleNext = () => {
+    const track = galleryRef.current;
+    if (!track) return;
+    const step = Math.round(track.clientWidth);
+    const max = track.scrollWidth - track.clientWidth;
+    if (track.scrollLeft >= max - 5) {
+      track.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      track.scrollBy({ left: step, behavior: 'smooth' });
+    }
+  };
+  const handlePrev = () => {
+    const track = galleryRef.current;
+    if (!track) return;
+    const step = Math.round(track.clientWidth);
+    const max = track.scrollWidth - track.clientWidth;
+    if (track.scrollLeft <= 5) {
+      track.scrollTo({ left: max, behavior: 'smooth' });
+    } else {
+      track.scrollBy({ left: -step, behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     let isMounted = true;
@@ -51,6 +88,38 @@ const About = () => {
           <div className="about-sections">
             <Markdown>{markdown}</Markdown>
           </div>
+
+          {/* Swipeable Photo Gallery at bottom */}
+          <section className="about-gallery" aria-label="Photo gallery">
+            <div className="gallery-header">
+              <h3><i className="fas fa-images" /> Photos</h3>
+            </div>
+            <div className="gallery-wrapper">
+              <button
+                type="button"
+                className="gallery-nav prev"
+                aria-label="Previous"
+                onClick={handlePrev}
+              >
+                <i className="fas fa-chevron-left" />
+              </button>
+              <div className="gallery-track" ref={galleryRef}>
+                {galleryImages.map((img) => (
+                  <div className="gallery-card" key={img.key}>
+                    <img src={img.src} alt="Rohan Malhotra" loading="lazy" decoding="async" />
+                  </div>
+                ))}
+              </div>
+              <button
+                type="button"
+                className="gallery-nav next"
+                aria-label="Next"
+                onClick={handleNext}
+              >
+                <i className="fas fa-chevron-right" />
+              </button>
+            </div>
+          </section>
 
         </div>
       </article>
