@@ -13,35 +13,80 @@ const RohanGPTPopup = () => {
     navigate('/rohanai');
   };
 
-  // Theme detection (prefers site toggle with `.theme-dark`, then OS fallback)
-  const isDark = (
-    (typeof document !== 'undefined'
-      && (document.documentElement.classList.contains('theme-dark')
-        || document.body.classList.contains('theme-dark')))
-    || (typeof window !== 'undefined'
-      && window.matchMedia
-      && window.matchMedia('(prefers-color-scheme: dark)').matches)
-  );
+  // Theme detection
+  // Priority: explicit site theme classes > OS preference
+  let isDark = false;
+  if (typeof document !== 'undefined') {
+    const root = document.documentElement;
+    const hasDark = root.classList.contains('theme-dark') || document.body.classList.contains('theme-dark');
+    const hasLight = root.classList.contains('theme-light') || document.body.classList.contains('theme-light');
+    if (hasDark) isDark = true;
+    else if (hasLight) isDark = false;
+    else if (typeof window !== 'undefined' && window.matchMedia) {
+      isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+  }
 
   const colors = {
     // Floating icon button
-    fabBg: isDark ? 'rgba(18,24,33,0.9)' : 'rgba(255,255,255,0.85)',
-    fabBorder: isDark ? 'rgba(255,255,255,0.14)' : 'rgba(0,0,0,0.12)',
-    fabIcon: isDark ? '#ffffff' : '#0a0c10',
+    fabBg: isDark ? 'rgba(18,24,33,0.9)' : '#ffffff',
+    fabBorder: isDark ? 'rgba(255,255,255,0.14)' : 'rgba(0,0,0,0.18)',
+    fabIcon: isDark ? '#ffffff' : '#000000',
     // Popup shell
-    shellBg: isDark ? 'rgba(18,24,33,0.92)' : 'rgba(255,255,255,0.92)',
-    shellBorder: isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.1)',
-    text: isDark ? '#ffffff' : '#0a0c10',
+    shellBg: isDark ? 'rgba(18,24,33,0.92)' : '#ffffff',
+    shellBorder: isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.12)',
+    text: isDark ? '#ffffff' : '#000000',
     // Header
-    headerBg: isDark ? 'rgba(24,119,242,0.12)' : 'rgba(24,119,242,0.06)',
-    headerBorder: isDark ? 'rgba(24,119,242,0.25)' : 'rgba(24,119,242,0.2)',
+    headerBg: isDark ? 'rgba(24,119,242,0.12)' : 'rgba(24,119,242,0.05)',
+    headerBorder: isDark ? 'rgba(24,119,242,0.25)' : 'rgba(0,0,0,0.08)',
     // Buttons
-    primaryBg: isDark ? 'rgba(24,119,242,0.18)' : 'rgba(24,119,242,0.12)',
-    primaryBorder: isDark ? 'rgba(24,119,242,0.35)' : 'rgba(24,119,242,0.3)',
+    primaryBg: isDark ? 'rgba(24,119,242,0.18)' : 'rgba(24,119,242,0.10)',
+    primaryBorder: isDark ? 'rgba(24,119,242,0.35)' : 'rgba(24,119,242,0.25)',
     primaryText: isDark ? '#E3EEFF' : '#184F9E',
-    subtleBg: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.7)',
-    subtleBorder: isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.1)',
+    subtleBg: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.9)',
+    subtleBorder: isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.12)',
   };
+
+  const dialogBoxShadow = isDark
+    ? '0 18px 40px rgba(0,0,0,0.25)'
+    : '0 12px 30px rgba(0,0,0,0.12)';
+
+  // Light mode overrides for embedded chat
+  const lightCss = !isDark ? `
+    #rohangpt-popup .messages-container {
+      background: #ffffff !important;
+      color: #0a0c10 !important;
+    }
+    #rohangpt-popup .welcome-message {
+      background: #ffffff !important;
+      color: #0a0c10 !important;
+      border: 1px solid rgba(0,0,0,0.08) !important;
+    }
+    #rohangpt-popup .message.user .message-bubble {
+      background: #f4f7fb !important;
+      color: #0a0c10 !important;
+      border: 1px solid rgba(0,0,0,0.06) !important;
+    }
+    #rohangpt-popup .message.bot .message-bubble {
+      background: #ffffff !important;
+      color: #0a0c10 !important;
+      border: 1px solid rgba(0,0,0,0.06) !important;
+    }
+    #rohangpt-popup .input-container {
+      background: #ffffff !important;
+      border-top: 1px solid rgba(0,0,0,0.08) !important;
+    }
+    #rohangpt-popup .message-input,
+    #rohangpt-popup .name-input {
+      background: #ffffff !important;
+      color: #0a0c10 !important;
+      border: 1px solid rgba(0,0,0,0.12) !important;
+    }
+    #rohangpt-popup .message-input::placeholder,
+    #rohangpt-popup .name-input::placeholder {
+      color: #667085 !important;
+    }
+  ` : '';
 
   return (
     <>
@@ -125,7 +170,7 @@ const RohanGPTPopup = () => {
               background: colors.shellBg,
               backdropFilter: 'saturate(160%) blur(12px)',
               WebkitBackdropFilter: 'saturate(160%) blur(12px)',
-              boxShadow: '0 18px 40px rgba(0,0,0,0.25)',
+              boxShadow: dialogBoxShadow,
               display: 'flex',
               flexDirection: 'column',
               color: colors.text,
@@ -143,15 +188,15 @@ const RohanGPTPopup = () => {
                 gap: '10px',
               }}
             >
-              <strong style={{ fontSize: '0.95rem' }}>RohanGPT</strong>
+              <strong style={{ fontSize: '0.95rem', color: '#ffffff' }}>RohanGPT</strong>
               <div />
               <button
                 type="button"
                 onClick={goFull}
                 style={{
-                  border: `1px solid ${colors.primaryBorder}`,
-                  background: colors.primaryBg,
-                  color: colors.primaryText,
+                  border: isDark ? `1px solid ${colors.primaryBorder}` : '1px solid rgba(255,255,255,0.75)',
+                  background: isDark ? colors.primaryBg : 'rgba(255,255,255,0.15)',
+                  color: '#ffffff',
                   borderRadius: '10px',
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -200,6 +245,7 @@ const RohanGPTPopup = () => {
                 #rohangpt-popup .welcome-message h4 {
                   font-size: 1rem !important;
                   margin-bottom: 6px !important;
+                  color: #ffffff !important;
                 }
                 /* Only show the heading: "Welcome to RohanGPT!" */
                 #rohangpt-popup .welcome-message p { display: none !important; }
@@ -248,6 +294,7 @@ const RohanGPTPopup = () => {
                   font-size: 0.9rem !important;
                   line-height: 1 !important;
                 }
+                ${lightCss}
               `}
               </style>
               <RohanGPT rootId="rohangpt-popup" messagePlaceholder="" />

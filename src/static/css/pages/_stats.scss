@@ -34,7 +34,7 @@
       animation: fadeInDown 0.8s ease;
 
       a {
-        color: white;
+        color: white !important;
         text-decoration: none;
         transition: all 0.3s ease;
 
@@ -47,11 +47,12 @@
 
     p {
       font-size: 1.2em;
-      opacity: 0.9;
+      opacity: 0.95;
       margin: 0;
       position: relative;
       z-index: 1;
       animation: fadeInUp 0.8s ease 0.2s both;
+      color: white !important;
     }
   }
 

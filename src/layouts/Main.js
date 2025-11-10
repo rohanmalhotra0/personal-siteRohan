@@ -8,6 +8,7 @@ import Navigation from '../components/Template/Navigation';
 import SideBar from '../components/Template/SideBar';
 import ScrollToTop from '../components/Template/ScrollToTop';
 import RohanGPTPopup from '../components/Template/RohanGPTPopup';
+import { ConversationProvider } from '../components/Template/ConversationContext';
 
 const Main = (props) => {
   const location = useLocation();
@@ -15,22 +16,24 @@ const Main = (props) => {
 
   return (
     <HelmetProvider>
-      <Analytics />
-      <ScrollToTop />
-      <Helmet
-        titleTemplate="%s | Rohan Malhotra"
-        defaultTitle="Rohan Malhotra"
-        defer={false}
-      >
-        {props.title && <title>{props.title}</title>}
-        <meta name="description" content={props.description} />
-      </Helmet>
-      <div id="wrapper">
-        <Navigation />
-        <div id="main">{props.children}</div>
-        {props.fullPage ? null : <SideBar />}
-      </div>
-      {!isRohanAI && <RohanGPTPopup />}
+      <ConversationProvider>
+        <Analytics />
+        <ScrollToTop />
+        <Helmet
+          titleTemplate="%s | Rohan Malhotra"
+          defaultTitle="Rohan Malhotra"
+          defer={false}
+        >
+          {props.title && <title>{props.title}</title>}
+          <meta name="description" content={props.description} />
+        </Helmet>
+        <div id="wrapper">
+          <Navigation />
+          <div id="main">{props.children}</div>
+          {props.fullPage ? null : <SideBar />}
+        </div>
+        {!isRohanAI && <RohanGPTPopup />}
+      </ConversationProvider>
     </HelmetProvider>
   );
 };

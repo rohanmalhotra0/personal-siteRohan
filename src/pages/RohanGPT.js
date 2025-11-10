@@ -1,10 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+} from 'react';
 import PropTypes from 'prop-types';
+import { ConversationContext } from '../components/Template/ConversationContext';
 
 const RohanGPT = ({ rootId, messagePlaceholder }) => {
-  const [messages, setMessages] = useState([]);
+  const conversation = useContext(ConversationContext);
+  const [messagesLocal, setMessagesLocal] = useState([]);
   const [input, setInput] = useState('');
-  const [name, setName] = useState('');
+  const [nameLocal, setNameLocal] = useState('');
   const [loading, setLoading] = useState(false);
   const chatEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -24,9 +31,14 @@ const RohanGPT = ({ rootId, messagePlaceholder }) => {
     }
   };
 
+  const activeMessages = conversation ? conversation.messages : messagesLocal;
+  const setActiveMessages = conversation ? conversation.setMessages : setMessagesLocal;
+  const activeName = conversation ? conversation.name : nameLocal;
+  const setActiveName = conversation ? conversation.setName : setNameLocal;
+
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [activeMessages]);
 
   useEffect(() => {
     autoResize();
@@ -66,17 +78,17 @@ const RohanGPT = ({ rootId, messagePlaceholder }) => {
   };
 
   const askRohan = async () => {
-    if (!input.trim() || !name.trim()) return;
+    if (!input.trim() || !activeName.trim()) return;
 
     const userMessage = {
       id: Date.now(),
       role: 'user',
       content: input,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      name,
+      name: activeName,
     };
 
-    setMessages((prev) => [...prev, userMessage]);
+    setActiveMessages((prev) => [...prev, userMessage]);
     setInput('');
     setLoading(true);
 
@@ -88,7 +100,7 @@ const RohanGPT = ({ rootId, messagePlaceholder }) => {
     }, 100);
 
     // Check for personalized overrides first
-    const override = getPersonalizedOverride(input, name);
+    const override = getPersonalizedOverride(input, activeName);
     if (override) {
       setTimeout(() => {
         const botMessage = {
@@ -97,7 +109,7 @@ const RohanGPT = ({ rootId, messagePlaceholder }) => {
           content: override,
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         };
-        setMessages((prev) => [...prev, botMessage]);
+        setActiveMessages((prev) => [...prev, botMessage]);
         setLoading(false);
       }, 1000);
       return;
@@ -125,8 +137,8 @@ const RohanGPT = ({ rootId, messagePlaceholder }) => {
         },
         body: JSON.stringify({
           message: input,
-          name,
-          conversationHistory: messages.slice(-10), // Last 10 messages for context
+          name: activeName,
+          conversationHistory: activeMessages.slice(-10), // Last 10 messages for context
         }),
       });
 
@@ -149,7 +161,7 @@ const RohanGPT = ({ rootId, messagePlaceholder }) => {
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
 
-      setMessages((prev) => [...prev, botMessage]);
+      setActiveMessages((prev) => [...prev, botMessage]);
     } catch (error) {
       console.error('Error:', error);
 
@@ -169,7 +181,7 @@ const RohanGPT = ({ rootId, messagePlaceholder }) => {
         content: errorMessage,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
-      setMessages((prev) => [...prev, botMessage]);
+      setActiveMessages((prev) => [...prev, botMessage]);
     } finally {
       setLoading(false);
     }
@@ -205,7 +217,7 @@ const RohanGPT = ({ rootId, messagePlaceholder }) => {
 
         {/* Messages - Now at the top */}
         <div className="messages-container" ref={chatEndRef}>
-          {messages.length === 0 && (
+          {activeMessages.length === 0 && (
             <div className="welcome-message">
               <div className="welcome-icon" />
               <h4>Welcome to RohanGPT!</h4>
@@ -213,7 +225,7 @@ const RohanGPT = ({ rootId, messagePlaceholder }) => {
             </div>
           )}
 
-          {messages.map((msg) => (
+          {activeMessages.map((msg) => (
             <div key={msg.id} className={`message ${msg.role === 'user' ? 'user' : 'bot'}`}>
               <div className="message-avatar">
                 {msg.role === 'user' ? (
@@ -274,8 +286,8 @@ const RohanGPT = ({ rootId, messagePlaceholder }) => {
                   <input
                     type="text"
                     placeholder="Your name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={activeName}
+                    onChange={(e) => setActiveName(e.target.value)}
                     className="name-input"
                     maxLength={20}
                   />
@@ -284,7 +296,7 @@ const RohanGPT = ({ rootId, messagePlaceholder }) => {
               <button
                 type="button"
                 onClick={askRohan}
-                disabled={!input.trim() || !name.trim() || loading}
+                disabled={!input.trim() || !activeName.trim() || loading}
                 className="send-button"
               >
                 Send
