@@ -7,11 +7,32 @@ import React, {
 import PropTypes from 'prop-types';
 import { ConversationContext } from '../components/Template/ConversationContext';
 
-const RohanGPT = ({ rootId, messagePlaceholder }) => {
+const RohanGPT = ({
+  rootId,
+  messagePlaceholder,
+  storageKeyPrefix,
+  forceLocalState,
+}) => {
   const conversation = useContext(ConversationContext);
-  const [messagesLocal, setMessagesLocal] = useState([]);
+  const useIsolated = forceLocalState || !conversation;
+  const [messagesLocal, setMessagesLocal] = useState(() => {
+    if (!useIsolated) return [];
+    try {
+      const raw = window.localStorage.getItem(`${storageKeyPrefix}rgpt_messages`);
+      return raw ? JSON.parse(raw) : [];
+    } catch (_) {
+      return [];
+    }
+  });
   const [input, setInput] = useState('');
-  const [nameLocal, setNameLocal] = useState('');
+  const [nameLocal, setNameLocal] = useState(() => {
+    if (!useIsolated) return '';
+    try {
+      return window.localStorage.getItem(`${storageKeyPrefix}rgpt_name`) || '';
+    } catch (_) {
+      return '';
+    }
+  });
   const [loading, setLoading] = useState(false);
   const chatEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -31,10 +52,10 @@ const RohanGPT = ({ rootId, messagePlaceholder }) => {
     }
   };
 
-  const activeMessages = conversation ? conversation.messages : messagesLocal;
-  const setActiveMessages = conversation ? conversation.setMessages : setMessagesLocal;
-  const activeName = conversation ? conversation.name : nameLocal;
-  const setActiveName = conversation ? conversation.setName : setNameLocal;
+  const activeMessages = useIsolated ? messagesLocal : conversation.messages;
+  const setActiveMessages = useIsolated ? setMessagesLocal : conversation.setMessages;
+  const activeName = useIsolated ? nameLocal : conversation.name;
+  const setActiveName = useIsolated ? setNameLocal : conversation.setName;
 
   useEffect(() => {
     scrollToBottom();
@@ -43,6 +64,25 @@ const RohanGPT = ({ rootId, messagePlaceholder }) => {
   useEffect(() => {
     autoResize();
   }, [input]);
+
+  // Persist isolated conversation/name
+  useEffect(() => {
+    if (!useIsolated) return;
+    try {
+      window.localStorage.setItem(`${storageKeyPrefix}rgpt_messages`, JSON.stringify(messagesLocal));
+    } catch (_) {
+      // ignore
+    }
+  }, [useIsolated, messagesLocal, storageKeyPrefix]);
+
+  useEffect(() => {
+    if (!useIsolated) return;
+    try {
+      window.localStorage.setItem(`${storageKeyPrefix}rgpt_name`, nameLocal || '');
+    } catch (_) {
+      // ignore
+    }
+  }, [useIsolated, nameLocal, storageKeyPrefix]);
 
   // Focus input on mobile
   useEffect(() => {
@@ -116,9 +156,24 @@ const RohanGPT = ({ rootId, messagePlaceholder }) => {
     }
 
     try {
-      const functionsBase = process.env.NODE_ENV === 'production'
-        ? 'https://rohanm.org' // Use the actual domain for production
-        : 'http://localhost:8888';
+      // Determine functions base robustly for prod and local dev (3000 or 8888)
+      let functionsBase = 'https://rohanm.org';
+      if (process.env.NODE_ENV !== 'production') {
+        if (process.env.REACT_APP_FUNCTIONS_BASE) {
+          functionsBase = process.env.REACT_APP_FUNCTIONS_BASE;
+        } else if (typeof window !== 'undefined') {
+          const { location } = window;
+          const isLocalhost = ['localhost', '127.0.0.1'].includes(location.hostname);
+          if (isLocalhost) {
+            // If running the React dev server on :3000, call Netlify Dev on :8888
+            functionsBase = location.port === '3000'
+              ? 'http://localhost:8888'
+              : `${location.protocol}//${location.hostname}:${location.port || '8888'}`;
+          }
+        } else {
+          functionsBase = 'http://localhost:8888';
+        }
+      }
 
       // console.log('Making API call to:', `${functionsBase}/.netlify/functions/ask-rohan`);
       // console.log('Environment:', process.env.NODE_ENV);
@@ -312,11 +367,15 @@ const RohanGPT = ({ rootId, messagePlaceholder }) => {
 RohanGPT.propTypes = {
   rootId: PropTypes.string,
   messagePlaceholder: PropTypes.string,
+  storageKeyPrefix: PropTypes.string,
+  forceLocalState: PropTypes.bool,
 };
 
 RohanGPT.defaultProps = {
   rootId: 'rohangpt',
   messagePlaceholder: 'Ask RohanGPT anything...',
+  storageKeyPrefix: '',
+  forceLocalState: false,
 };
 
 export default RohanGPT;

@@ -1,10 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import RohanGPT from '../../pages/RohanGPT';
 
 const RohanGPTPopup = () => {
   const [open, setOpen] = useState(false);
+  const [messages, setMessages] = useState(() => {
+    try {
+      const raw = window.localStorage.getItem('popup_rgpt_messages');
+      return raw ? JSON.parse(raw) : [];
+    } catch (_) {
+      return [];
+    }
+  });
+  const [name, setName] = useState(() => {
+    try {
+      return window.localStorage.getItem('popup_rgpt_name') || '';
+    } catch (_) {
+      return '';
+    }
+  });
+  const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const messagesRef = useRef(null);
 
   const toggle = () => setOpen((v) => !v);
 
@@ -12,6 +29,27 @@ const RohanGPTPopup = () => {
     setOpen(false);
     navigate('/rohanai');
   };
+
+  // Persist popup conversation
+  useEffect(() => {
+    try {
+      window.localStorage.setItem('popup_rgpt_messages', JSON.stringify(messages));
+    } catch (_) {
+      // ignore
+    }
+  }, [messages]);
+  useEffect(() => {
+    try {
+      window.localStorage.setItem('popup_rgpt_name', name || '');
+    } catch (_) {
+      // ignore
+    }
+  }, [name]);
+  useEffect(() => {
+    if (messagesRef.current) {
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+    }
+  }, [messages, open]);
 
   // Theme detection: match site theme (no OS fallback)
   let isDark = false;
@@ -44,43 +82,77 @@ const RohanGPTPopup = () => {
     ? '0 18px 40px rgba(0,0,0,0.25)'
     : '0 12px 30px rgba(0,0,0,0.12)';
 
-  // Light mode overrides for embedded chat
-  const lightCss = !isDark ? `
-    #rohangpt-popup .messages-container {
-      background: #ffffff !important;
-      color: #0a0c10 !important;
+  const askPopup = async () => {
+    if (!input.trim() || !name.trim() || loading) return;
+
+    const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const userMsg = {
+      id: Date.now(),
+      role: 'user',
+      content: input,
+      timestamp: now,
+      name,
+    };
+    setMessages((prev) => [...prev, userMsg]);
+    setInput('');
+    setLoading(true);
+
+    try {
+      let functionsBase = 'https://rohanm.org';
+      if (process.env.NODE_ENV !== 'production') {
+        if (process.env.REACT_APP_FUNCTIONS_BASE) {
+          functionsBase = process.env.REACT_APP_FUNCTIONS_BASE;
+        } else if (typeof window !== 'undefined') {
+          const { location } = window;
+          const isLocalhost = ['localhost', '127.0.0.1'].includes(location.hostname);
+          if (isLocalhost) {
+            functionsBase = location.port === '3000' ? 'http://localhost:8888' : `${location.protocol}//${location.hostname}:${location.port || '8888'}`;
+          }
+        } else {
+          functionsBase = 'http://localhost:8888';
+        }
+      }
+
+      const response = await fetch(`${functionsBase}/.netlify/functions/ask-rohan`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: userMsg.content,
+          name,
+          conversationHistory: messages.slice(-10),
+        }),
+      });
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`HTTP ${response.status}: ${errorText}`);
+      }
+      const data = await response.json();
+      const botMsg = {
+        id: Date.now() + 1,
+        role: 'bot',
+        content: data.response || 'Thanks! I’ll get back to you.',
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      };
+      setMessages((prev) => [...prev, botMsg]);
+    } catch (e) {
+      const botMsg = {
+        id: Date.now() + 1,
+        role: 'bot',
+        content: 'Sorry, I can’t connect right now. Please try again shortly.',
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      };
+      setMessages((prev) => [...prev, botMsg]);
+    } finally {
+      setLoading(false);
     }
-    #rohangpt-popup .welcome-message {
-      background: #ffffff !important;
-      color: #0a0c10 !important;
-      border: 1px solid rgba(0,0,0,0.08) !important;
+  };
+
+  const onKeyPress = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      askPopup();
     }
-    #rohangpt-popup .welcome-message h4 { color: #0a0c10 !important; }
-    #rohangpt-popup .message.user .message-bubble {
-      background: #f4f7fb !important;
-      color: #0a0c10 !important;
-      border: 1px solid rgba(0,0,0,0.06) !important;
-    }
-    #rohangpt-popup .message.bot .message-bubble {
-      background: #ffffff !important;
-      color: #0a0c10 !important;
-      border: 1px solid rgba(0,0,0,0.06) !important;
-    }
-    #rohangpt-popup .input-container {
-      background: #ffffff !important;
-      border-top: 1px solid rgba(0,0,0,0.08) !important;
-    }
-    #rohangpt-popup .message-input,
-    #rohangpt-popup .name-input {
-      background: #ffffff !important;
-      color: #0a0c10 !important;
-      border: 1px solid rgba(0,0,0,0.12) !important;
-    }
-    #rohangpt-popup .message-input::placeholder,
-    #rohangpt-popup .name-input::placeholder {
-      color: #667085 !important;
-    }
-  ` : '';
+  };
 
   return (
     <>
@@ -206,92 +278,142 @@ const RohanGPTPopup = () => {
                 Open full
               </button>
             </div>
-            {/* Embed the chat with a distinct root id to avoid duplicate IDs */}
-            <div style={{ flex: 1, minHeight: 0 }}>
-              {/* Scoped compact overrides for popup instance */}
-              <style>
-                {`
-                #rohangpt-popup .mobile-chat-container {
-                  height: 100%;
-                  background: transparent !important;
-                  border-radius: 0;
-                }
-                /* Simplify header/content inside popup */
-                #rohangpt-popup .chat-header { display: none !important; }
-                #rohangpt-popup .status-indicator { display: none !important; }
-                #rohangpt-popup .bot-info { display: none !important; }
-                #rohangpt-popup .chat-header {
-                  padding: 8px 10px !important;
-                }
-                #rohangpt-popup .chat-header h3 {
-                  font-size: 1rem !important;
-                  margin: 0;
-                }
-                #rohangpt-popup .chat-header p,
-                #rohangpt-popup .status-indicator span {
-                  font-size: 0.8rem !important;
-                }
-                #rohangpt-popup .messages-container {
-                  flex: 1 1 auto !important;
-                  height: auto !important;
-                  padding: 10px !important;
-                }
-                #rohangpt-popup .welcome-message h4 {
-                  font-size: 1rem !important;
-                  margin-bottom: 6px !important;
-                  color: #ffffff !important;
-                }
-                /* Only show the heading: "Welcome to RohanGPT!" */
-                #rohangpt-popup .welcome-message p { display: none !important; }
-                #rohangpt-popup .message .message-bubble {
-                  font-size: 0.92rem !important;
-                  line-height: 1.35 !important;
-                }
-                #rohangpt-popup .input-container {
-                  padding: 8px !important;
-                }
-                /* Add spacing between text area and bottom row to detach send button */
-                #rohangpt-popup .message-input-wrapper { margin-bottom: 8px !important; }
-                /* Use grid to prevent overlap: name input expands, button stays auto width */
-                #rohangpt-popup .bottom-row {
-                  display: grid !important;
-                  grid-template-columns: 1fr auto !important;
-                  gap: 10px !important;
-                  align-items: center !important;
-                }
-                #rohangpt-popup .name-input-wrapper { min-width: 0 !important; width: 100% !important; }
-                #rohangpt-popup .name-input { width: 100% !important; }
-                #rohangpt-popup .send-button {
-                  border-radius: 10px !important;
-                  margin-left: 6px !important;
-                  height: 28px !important;
-                  padding: 0 10px !important;
-                  font-size: 0.85rem !important;
-                  line-height: 1 !important;
-                  display: inline-flex !important;
-                  align-items: center !important;
-                  justify-content: center !important;
-                }
-                /* Remove message/user icons and adjust padding */
-                #rohangpt-popup .input-icon { display: none !important; }
-                #rohangpt-popup .input-with-icon .message-input,
-                #rohangpt-popup .input-with-icon .name-input {
-                  padding-left: 12px !important;
-                }
-                #rohangpt-popup .message-input,
-                #rohangpt-popup .name-input {
-                  font-size: 0.92rem !important;
-                  min-height: 38px !important;
-                }
-                #rohangpt-popup .send-button {
-                  padding: 6px 10px !important;
-                  font-size: 0.9rem !important;
-                  line-height: 1 !important;
-                }
-                ${lightCss}
-              `}
-              </style>
-              <RohanGPT rootId="rohangpt-popup" messagePlaceholder="" />
+            {/* Simple chat body */}
+            <div
+              style={{
+                flex: 1,
+                minHeight: 0,
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <div
+                ref={messagesRef}
+                style={{
+                  flex: 1,
+                  overflowY: 'auto',
+                  padding: '10px',
+                  background: isDark ? 'rgba(18,24,33,0.92)' : '#ffffff',
+                }}
+              >
+                {messages.length === 0 && (
+                  <div
+                    style={{
+                      textAlign: 'center',
+                      color: colors.text,
+                      padding: '16px 8px',
+                    }}
+                  >
+                    Welcome to RohanGPT!
+                  </div>
+                )}
+                {messages.map((m) => {
+                  const isUser = m.role === 'user';
+                  let bubbleBg;
+                  if (isUser) {
+                    bubbleBg = isDark ? 'rgba(24,119,242,0.18)' : '#f4f7fb';
+                  } else {
+                    bubbleBg = isDark ? 'rgba(255,255,255,0.06)' : '#ffffff';
+                  }
+                  let bubbleBorder;
+                  if (isUser) {
+                    bubbleBorder = isDark ? 'rgba(24,119,242,0.35)' : 'rgba(24,119,242,0.25)';
+                  } else {
+                    bubbleBorder = isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.12)';
+                  }
+                  return (
+                    <div
+                      key={m.id}
+                      style={{
+                        display: 'flex',
+                        justifyContent: isUser ? 'flex-end' : 'flex-start',
+                        marginBottom: '8px',
+                      }}
+                    >
+                      <div
+                        style={{
+                          background: bubbleBg,
+                          color: isDark ? '#ffffff' : '#0a0c10',
+                          border: `1px solid ${bubbleBorder}`,
+                          padding: '8px 10px',
+                          borderRadius: '12px',
+                          maxWidth: '85%',
+                          wordBreak: 'break-word',
+                          boxSizing: 'border-box',
+                        }}
+                      >
+                        <div style={{ marginBottom: '4px' }}>{m.content}</div>
+                        <div style={{ fontSize: '11px', opacity: 0.7 }}>{m.timestamp}</div>
+                      </div>
+                    </div>
+                  );
+                })}
+                {loading && (
+                  <div style={{ color: colors.text, fontSize: '12px', opacity: 0.7 }}>Typing…</div>
+                )}
+              </div>
+              <div
+                style={{
+                  borderTop: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.1)'}`,
+                  padding: '8px',
+                  background: isDark ? 'rgba(18,24,33,0.92)' : '#ffffff',
+                }}
+              >
+                <div style={{ marginBottom: '8px' }}>
+                  <textarea
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyPress={onKeyPress}
+                    rows={2}
+                    placeholder=""
+                    style={{
+                      width: '100%',
+                      border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.15)'}`,
+                      background: isDark ? 'rgba(18,24,33,0.92)' : '#ffffff',
+                      color: colors.text,
+                      borderRadius: '10px',
+                      padding: '8px',
+                      resize: 'vertical',
+                      boxSizing: 'border-box',
+                    }}
+                  />
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '8px' }}>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Your name"
+                    style={{
+                      width: '100%',
+                      border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.15)'}`,
+                      background: isDark ? 'rgba(18,24,33,0.92)' : '#ffffff',
+                      color: colors.text,
+                      borderRadius: '10px',
+                      padding: '8px',
+                      boxSizing: 'border-box',
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={askPopup}
+                    disabled={!input.trim() || !name.trim() || loading}
+                    style={{
+                      border: `1px solid ${isDark ? colors.primaryBorder : 'rgba(0,0,0,0.12)'}`,
+                      background: isDark ? colors.primaryBg : '#ffffff',
+                      color: colors.text,
+                      borderRadius: '10px',
+                      height: '28px',
+                      padding: '0 10px',
+                      cursor: 'pointer',
+                      fontSize: '0.85rem',
+                      lineHeight: 1,
+                    }}
+                  >
+                    Send
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </>
