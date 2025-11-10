@@ -22,7 +22,7 @@ const SideBar = () => (
     <section className="blurb">
       <h2>About</h2>
       <p>
-        Hi, I&apos;m Rohan Malhotra. I am a sophmore at New York University,
+        Hi, I&apos;m Rohan Malhotra. I am a Junior at New York University,
         double majoring in Computer Science and Mathematics.
         I have a passion for developing innovative software solutions
         and exploring emerging technologies. In my free time, I enjoy
